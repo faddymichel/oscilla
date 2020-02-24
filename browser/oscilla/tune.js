@@ -10,9 +10,9 @@ oscilla .oscillator = {};
 oscilla .amplifier = {};
 
 for (
-let first = tuning .frequency / 2 ** ( tuning .pitch / tuning .steps ),
+let first = tuning .frequency * 2 ** ( -tuning .pitch / tuning .steps ),
 i = 1;
-i <= tuning .steps;
+i <= tuning .keys;
 i++
 ) {
 

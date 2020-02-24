@@ -1,3 +1,6 @@
+import { descriptor as tune } from './tune.js';
+import { descriptor as pitch } from './pitch.js';
+
 export const Oscilla = function Oscilla () {
 
 const oscilla = this;
@@ -8,33 +11,13 @@ value: new ( window .AudioContext || window .WebkitAudioContext ) ()
 
 } );
 
-oscilla .tune ( {
-
-frequency: 440,
-pitch: 10,
-steps: 12
-
-} );
-
 };
 
-Oscilla .prototype .loudness = .5;
+Oscilla .prototype .loudness = .3;
 Oscilla .prototype .attack = .1;
 Oscilla .prototype .decay = .1;
-Oscilla .prototype .sustain = .25;
+Oscilla .prototype .sustain = .1;
 Oscilla .prototype .release = .1;
 
-[
-
-'tune',
-'pitch'
-
-] .forEach ( ( property ) => {
-
-import ( `./${ property }.js` ) .then ( ( { descriptor } ) => {
-
-Object .defineProperty ( Oscilla .prototype, property, descriptor );
-
-} );
-
-} );
+Object .defineProperty ( Oscilla .prototype, 'tune', tune );
+Object .defineProperty ( Oscilla .prototype, 'pitch', pitch );

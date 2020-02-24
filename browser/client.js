@@ -1,9 +1,18 @@
 import { Oscilla } from './oscilla/index.js';
 
-window.onload = () => {
+window .onload = () => {
 
 const oscilla = new Oscilla ();
-const scale = 'sedrfjikolp;';
+const scale = "qawsedrfjikolp;['";
+
+oscilla .tune ( {
+
+frequency: 440,
+pitch: scale .indexOf ( 'l' ) + 1,
+steps: 12,
+keys: scale .length
+
+} );
 
 document .onkeydown = ( event ) => {
 
