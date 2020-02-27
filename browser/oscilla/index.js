@@ -1,5 +1,7 @@
 import { descriptor as tune } from './tune.js';
 import { descriptor as pitch } from './pitch.js';
+import { Descriptor as Wave } from './wave.js';
+import { Descriptor as Octave } from './octave.js';
 
 const context = new ( window .AudioContext || window .WebkitAudioContext ) ();
 export const Oscilla = function Oscilla () {
@@ -11,6 +13,9 @@ Object .defineProperty ( oscilla, 'context', {
 value: context
 
 } );
+
+Object .defineProperty ( oscilla, 'wave', Wave () );
+Object .defineProperty ( oscilla, 'octave', Octave () );
 
 };
 

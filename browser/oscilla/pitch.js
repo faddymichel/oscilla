@@ -4,36 +4,37 @@ descriptor .enumerable = true;
 
 descriptor .value = function pitch ( note ) {
 
-const { context, loudness, amplifier, attack, decay, sustain, release } = this;
+const { context, loudness, amplifiers, attack, decay, sustain, release } = this;
 
 console .log ( attack, decay, sustain, release );
+console .log ( 'loudness:', loudness );
 
-if ( !amplifier [ Math .abs ( note ) ] )
+if ( !amplifiers [ Math .abs ( note ) ] )
 return;
 
 if ( note > 0 ) {
 
-amplifier [ note ]
+amplifiers [ note ]
 .gain
 .cancelScheduledValues (
 context .currentTime + release
 );
 
-amplifier [ note ]
+amplifiers [ note ]
 .gain
 .linearRampToValueAtTime (
 0,
 context .currentTime
 );
 
-amplifier [ note ]
+amplifiers [ note ]
 .gain
 .linearRampToValueAtTime (
 loudness,
 context .currentTime + attack
 );
 
-amplifier [ note ]
+amplifiers [ note ]
 .gain
 .linearRampToValueAtTime (
 sustain,
@@ -42,20 +43,20 @@ context .currentTime + attack + decay
 
 } else {
 
-amplifier [ -note ]
+amplifiers [ -note ]
 .gain
 .cancelScheduledValues (
 context .currentTime + release
 );
 
-amplifier [ -note ]
+amplifiers [ -note ]
 .gain
 .linearRampToValueAtTime (
 sustain,
 context .currentTime
 );
 
-amplifier [ -note ]
+amplifiers [ -note ]
 .gain
 .linearRampToValueAtTime (
 0,

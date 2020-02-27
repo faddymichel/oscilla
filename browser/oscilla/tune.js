@@ -6,8 +6,9 @@ descriptor .value = function tune ( tuning ) {
 
 const oscilla = this;
 
-oscilla .oscillator = {};
-oscilla .amplifier = {};
+oscilla .oscillators = {};
+oscilla .amplifiers = {};
+oscilla .steps = tuning .steps;
 
 for (
 let first = tuning .frequency * 2 ** ( -tuning .pitch / tuning .steps ),
@@ -18,31 +19,31 @@ i++
 
 const frequency = first * 2 ** ( i / tuning .steps );
 
-oscilla .amplifier [ i ] = oscilla .context .createGain ();
-oscilla .amplifier [ i ]
+oscilla .amplifiers [ i ] = oscilla .context .createGain ();
+oscilla .amplifiers [ i ]
 .gain
 .setValueAtTime (
 0,
 oscilla .context .currentTime
 );
 
-oscilla .oscillator [ i ] = oscilla .context .createOscillator ();
-oscilla .oscillator [ i ]
+oscilla .oscillators [ i ] = oscilla .context .createOscillator ();
+oscilla .oscillators [ i ]
 .frequency
 .setValueAtTime (
 frequency,
 oscilla .context .currentTime
 );
 
-oscilla .oscillator [ i ]
+oscilla .oscillators [ i ]
 .connect (
-oscilla .amplifier [ i ]
+oscilla .amplifiers [ i ]
 ) .connect (
 oscilla .context .destination
 );
 
 oscilla
-.oscillator [ i ]
+.oscillators [ i ]
 .start ();
 
 }
