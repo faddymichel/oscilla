@@ -1,13 +1,14 @@
-export const Scenarist = function Scenarist () {
+import { descriptor as create } from './create.js';
+import { descriptor as write } from './write.js';
+import { descriptor as play } from './play.js';
 
-const scenarist = this;
+export const scenarist = {};
 
-EventTarget .call ( scenarist );
+Object .defineProperty ( scenarist, 'lines', {
 
-Object .keys ( scenarist ) .forEach ( ( property ) => {
-
-const descriptor = Object .getOwnPropertyDescriptor ( scenarist, property );
-descriptor .enumerable = false;
-Object .defineProperty ( scenarist, property, descriptor );
+value: []
 
 } );
+Object .defineProperty ( scenarist, 'create', create );
+Object .defineProperty ( scenarist, 'write', write );
+Object .defineProperty ( scenarist, 'play', play );

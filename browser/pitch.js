@@ -1,10 +1,30 @@
-export const pitch = [];
-const scale = 'sedrfjikolp;';
+export const setting = {};
+setting .keys = "qawsedrfjikolp;[']";
+setting .pitch = 'l';
+setting .steps = 12;
 
-for ( let i = 0; i < 12; i++ ) {
+export const character = {};
+character .cast = setting .keys;
+character .action = function action ( event ) {
 
-pitch [ scale .charAt ( i ) ] = 440 * 2 ** ( i / 12 );
+const setting = this;
+const { multiphonic, keys } = setting;
+let note = 1 + keys .indexOf ( event .key );
+note = event .type .toLowerCase () === 'keydown' ? note : -note;
+
+if ( !event .repeat && Math .abs ( note ) > 0 ) {
+
+if ( multiphonic .play && multiphonic .oscilla .length > 0 )
+multiphonic .oscilla .forEach ( ( oscilla ) => {
+
+console .log ( 'oscilla:', oscilla );
+oscilla .pitch ( note );
+
+} );
+
+else if ( setting .oscilla )
+setting .oscilla .pitch ( note );
 
 }
 
-pitch [ ' ' ] = 0;
+};

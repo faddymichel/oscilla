@@ -14,15 +14,17 @@ const descriptor = {};
 descriptor .enumerable = true;
 descriptor .set = function set ( value ) {
 
-const { oscillators } = this;
+const { key } = this;
 
 wave = domain [ value ] ? domain [ value ] : domain [ '1' ];
 
-Object .keys ( oscillators ) .forEach ( ( key ) => {
+for ( let note in key ) {
 
-oscillators [ key ] .type = wave;
+key [ note ]
+.oscillator
+.type = wave;
 
-} );
+}
 
 };
 

@@ -1,5 +1,6 @@
 import { descriptor as tune } from './tune.js';
 import { descriptor as pitch } from './pitch.js';
+import { descriptor as loudness } from './loudness.js';
 import { Descriptor as Wave } from './wave.js';
 import { Descriptor as Octave } from './octave.js';
 
@@ -19,11 +20,11 @@ Object .defineProperty ( oscilla, 'octave', Octave () );
 
 };
 
-Oscilla .prototype .loudness = .3;
-Oscilla .prototype .attack = .1;
-Oscilla .prototype .decay = .1;
+Oscilla .prototype .attack = 0;
+Oscilla .prototype .decay = 0;
 Oscilla .prototype .sustain = .1;
-Oscilla .prototype .release = .1;
+Oscilla .prototype .release = 0;
 
 Object .defineProperty ( Oscilla .prototype, 'tune', tune );
 Object .defineProperty ( Oscilla .prototype, 'pitch', pitch );
+Object .defineProperty ( Oscilla .prototype, 'loudness', loudness );

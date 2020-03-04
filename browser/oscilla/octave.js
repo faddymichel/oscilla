@@ -8,23 +8,25 @@ descriptor .enumerable = true;
 
 descriptor .set = function set ( value ) {
 
-const { context, oscillators, steps } = this;
+const { context, key, steps } = this;
 
-if ( value !== 1 && value !== -1 )
+//if ( value !== 1 && value !== -1 )
+if ( value === 0 )
 return;
 
 octave += value;
 
-Object .keys ( oscillators ) .forEach ( ( key ) => {
+for ( let note in key ) {
 
-oscillators [ key ]
+key [ note ]
+.oscillator
 .detune
 .setValueAtTime (
-octave * 100 * steps,
+parseInt ( octave * 100 * steps ),
 context .currentTime
 );
 
-} );
+}
 
 };
 

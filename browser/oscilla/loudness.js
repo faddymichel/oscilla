@@ -1,7 +1,7 @@
-const Descriptor = () => {
+let loudness = .5;
+export const descriptor = {};
 
-let loudness;
-const descriptor = {};
+descriptor .enumerable = true;
 
 descriptor .get = function get () {
 
@@ -11,18 +11,9 @@ return loudness;
 
 descriptor .set = function set ( value ) {
 
-loudness = value;
-const { context, amplifier } = this;
+value = parseInt ( value );
 
-amplifier
-.gain
-.setValueAtTime (
-loudness,
-context .currentTime
-);
-
-};
-
-return descriptor;
+if ( Math .abs ( value ) >= 0 && Math .abs ( value ) <= 100 )
+loudness = value / 100;
 
 };
