@@ -12,9 +12,7 @@ switch ( event .key ) {
 
 case 'y':
 
-const oscilla = new Oscilla ();
-
-oscilla .tune ( {
+const oscilla = new Oscilla ( {
 
 frequency: 440,
 pitch: keys .indexOf ( pitch ) + 1,

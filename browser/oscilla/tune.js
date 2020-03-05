@@ -2,45 +2,41 @@ export const descriptor = {};
 
 descriptor .enumerable = true;
 
-descriptor .value = function tune ( tuning ) {
+descriptor .value = function tune ( note ) {
 
 const oscilla = this;
 
-oscilla .key = {};
-oscilla .steps = tuning .steps;
-
-for (
-let first = tuning .frequency * 2 ** ( -tuning .pitch / tuning .steps ),
-note = 1;
-note <= tuning .keys;
-note++
-) {
-
-const frequency = first * 2 ** ( note / tuning .steps );
-
-oscilla .key [ note ] = {};
-
 oscilla .key [ note ]
-.amplifier = oscilla .context .createGain ();
+.amplifier = oscilla .createGain ();
 
 oscilla .key [ note ]
 .amplifier
-.gain
-.setValueAtTime (
-0,
-oscilla .context .currentTime
-);
+.gain .value = 0;
 
 oscilla .key [ note ]
-.oscillator = oscilla .context .createOscillator ();
+.oscillator = oscilla .createOscillator ();
 
 oscilla .key [ note ]
 .oscillator
-.frequency
+.frequency .value = oscilla .key [ note ] .frequency;
+
+oscilla .key [ note ]
+.oscillator
+.detune .value = parseInt ( oscilla .octave * 100 * oscilla .steps );
+
+oscilla .addEventListener ( 'octave', () => {
+
+console .log ( 'octave' );
+
+oscilla .key [ note ]
+.oscillator
+.detune
 .setValueAtTime (
-frequency,
-oscilla .context .currentTime
+parseInt ( oscilla .octave * 100 * oscilla .steps ),
+oscilla .currentTime
 );
+
+}, false );
 
 oscilla .key [ note ]
 .oscillator
@@ -48,13 +44,11 @@ oscilla .key [ note ]
 oscilla .key [ note ]
 .amplifier
 ) .connect (
-oscilla .context .destination
+oscilla .destination
 );
 
 oscilla .key [ note ]
 .oscillator
 .start ();
-
-}
 
 };

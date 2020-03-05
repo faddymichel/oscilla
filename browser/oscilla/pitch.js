@@ -4,67 +4,69 @@ descriptor .enumerable = true;
 
 descriptor .value = function pitch ( note ) {
 
-const { context, loudness, key, attack, decay, sustain, release } = this;
+const oscilla = this;
 
-if ( !key [ Math .abs ( note ) ] )
+if ( !oscilla .key [ Math .abs ( note ) ] )
 return;
 
 if ( note > 0 ) {
 
-key [ note ]
+oscilla .tune ( note );
+
+oscilla .key [ note ]
 .amplifier
 .gain
 .cancelScheduledValues (
-context .currentTime + release
+oscilla .currentTime + oscilla .release
 );
 
-key [ note ]
+oscilla .key [ note ]
 .amplifier
 .gain
 .linearRampToValueAtTime (
 0,
-context .currentTime
+oscilla .currentTime
 );
 
-key [ note ]
+oscilla .key [ note ]
 .amplifier
 .gain
 .linearRampToValueAtTime (
-loudness,
-context .currentTime + attack
+oscilla .loudness,
+oscilla .currentTime + oscilla .attack
 );
 
-key [ note ]
+oscilla .key [ note ]
 .amplifier
 .gain
 .linearRampToValueAtTime (
-sustain,
-context .currentTime + attack + decay
+oscilla .sustain,
+oscilla .currentTime + oscilla .attack + oscilla .decay
 );
 
 } else {
 
-key [ -note ]
+oscilla .key [ -note ]
 .amplifier
 .gain
 .cancelScheduledValues (
-context .currentTime + release
+oscilla .currentTime + oscilla .release
 );
 
-key [ -note ]
+oscilla .key [ -note ]
 .amplifier
 .gain
 .linearRampToValueAtTime (
-sustain,
-context .currentTime
+oscilla .sustain,
+oscilla .currentTime
 );
 
-key [ -note ]
+oscilla .key [ -note ]
 .amplifier
 .gain
 .linearRampToValueAtTime (
 0,
-context .currentTime + release
+oscilla .currentTime + oscilla .release
 );
 
 }

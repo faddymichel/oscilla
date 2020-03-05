@@ -9,16 +9,16 @@ const { oscilla } = this;
 if ( event .type === 'keyup' ) {
 switch ( event .key ) {
 
-case 'z': setting .adsr = 'attack';
+case 'z': setting .adsr = 'attackTime';
 
 break;
-case 'x': setting .adsr = 'decay';
+case 'x': setting .adsr = 'decayTime';
 
 break;
 case 'c': setting .adsr = 'sustain';
 
 break;
-case 'v': setting .adsr = 'release';
+case 'v': setting .adsr = 'releaseTime';
 
 break;
 default:
