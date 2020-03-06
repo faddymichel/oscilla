@@ -2,44 +2,33 @@ export const descriptor = {};
 
 descriptor .enumerable = true;
 
-descriptor .value = function attack ( note ) {
+descriptor .value = function attack ( note, ... partials ) {
 
 const oscilla = this;
 
 if ( !oscilla .key [ Math .abs ( note ) ] )
 return;
 
-oscilla .tune ( note );
+oscilla .tune ( note, ... partials );
 
-oscilla .key [ note ]
-.amplifier
-.gain
-.cancelScheduledValues (
-oscilla .currentTime + oscilla .releaseTime
-);
+partials .forEach ( ( partial ) => {
 
-oscilla .key [ note ]
+oscilla .key [ note ] [ partial ]
 .amplifier
 .gain
 .linearRampToValueAtTime (
-0,
-oscilla .currentTime
-);
-
-oscilla .key [ note ]
-.amplifier
-.gain
-.linearRampToValueAtTime (
-oscilla .loudness,
+oscilla [ partial ] .loudness,
 oscilla .currentTime + oscilla .attackTime
 );
 
-oscilla .key [ note ]
+oscilla .key [ note ] [ partial ]
 .amplifier
 .gain
 .linearRampToValueAtTime (
-oscilla .sustain,
+oscilla [ partial ] .loudness * oscilla .sustain,
 oscilla .currentTime + oscilla .attackTime + oscilla .decayTime
 );
+
+} );
 
 };

@@ -2,29 +2,31 @@ export const descriptor = {};
 
 descriptor .enumerable = true;
 
-descriptor .value = function release ( note ) {
+descriptor .value = function release ( note, ... partials ) {
 
 const oscilla = this;
 
 if ( !oscilla .key [ Math .abs ( note ) ] )
 return;
 
-oscilla .key [ note ]
+partials .forEach ( ( partial ) => {
+
+oscilla .key [ note ] [ partial ]
 .amplifier
 .gain
 .cancelScheduledValues (
 oscilla .currentTime + oscilla .releaseTime
 );
 
-oscilla .key [ note ]
+oscilla .key [ note ] [ partial ]
 .amplifier
 .gain
 .linearRampToValueAtTime (
-oscilla .sustain,
+oscilla [ partial ] .loudness * oscilla .sustain,
 oscilla .currentTime
 );
 
-oscilla .key [ note ]
+oscilla .key [ note ] [ partial ]
 .amplifier
 .gain
 .linearRampToValueAtTime (
@@ -32,10 +34,12 @@ oscilla .key [ note ]
 oscilla .currentTime + oscilla .releaseTime
 );
 
-oscilla .key [ note ]
+oscilla .key [ note ] [ partial ]
 .oscillator
 .stop (
 oscilla .currentTime + oscilla .releaseTime
 );
+
+} );
 
 };

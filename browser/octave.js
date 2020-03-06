@@ -2,9 +2,12 @@ export const character = {};
 character .cast = 'gh';
 character .action = function action ( event ) {
 
-const { oscilla } = this;
+const { partial, oscilla } = this;
 
 if ( event .type === 'keyup' )
-oscilla .octave = character .cast .indexOf ( event .key ) === 0 ? -1 : 1;
+oscilla .detune (
+character .cast .indexOf ( event .key ) === 0 ? -1 : 1,
+partial
+);
 
 };

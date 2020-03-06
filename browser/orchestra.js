@@ -1,18 +1,22 @@
 import { Oscilla } from './oscilla/index.js';
 
+export const setting = {};
+setting .timbre = [];
+
 export const character = {};
 character .cast = 'tyu';
 character .action = function action ( event ) {
 
 const setting = this;
-const { orchestra, pitch, steps, keys } = setting;
+const { timbre, pitch, steps, keys } = setting;
 
 if ( event .type === 'keyup' )
 switch ( event .key ) {
 
 case 'y':
 
-const oscilla = new Oscilla ( {
+if ( !setting .oscilla )
+setting .oscilla = new Oscilla ( {
 
 frequency: 440,
 pitch: keys .indexOf ( pitch ) + 1,
@@ -21,30 +25,29 @@ keys: keys .length
 
 } );
 
-if ( setting .oscilla ) {
+const partial = setting .oscilla .partial ( {} );
 
-oscilla .octave = setting .oscilla .octave;
-orchestra .unshift ( setting .oscilla );
+if ( setting .partial ) {
+
+partial .octave = setting .partial .octave;
+timbre .unshift ( setting .partial );
 
 }
 
-setting .oscilla = oscilla;
+setting .partial = partial;
 
 break;
 case 'u':
 
-orchestra .unshift ( setting .oscilla );
-setting .oscilla = orchestra .pop ();
+timbre .unshift ( setting .partial );
+setting .partial = timbre .pop ();
 
 break;
 case 't':
 
-orchestra .push ( setting .oscilla );
-setting .oscilla = orchestra .shift ();
+timbre .push ( setting .partial );
+setting .partial = timbre .shift ();
 
 }
 
 };
-
-export const setting = {};
-setting .orchestra = [];

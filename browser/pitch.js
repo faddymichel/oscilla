@@ -27,11 +27,11 @@ else if ( setting .oscilla )
 if ( event .type === 'keydown' && !attacked [ note ] ) {
 
 attacked [ note ] = true;
-setting .oscilla .attack ( note );
+setting .oscilla .attack ( note, setting .partial );
 
 } else if ( event .type === 'keyup' && attacked [ note ] ) {
 
-setting .oscilla .release ( note );
+setting .oscilla .release ( note, setting .partial );
 attacked [ note ] = false;
 
 }
