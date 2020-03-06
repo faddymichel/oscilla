@@ -8,9 +8,11 @@ domain [ '4' ] = 'triangle';
 export const descriptor = {};
 
 descriptor .enumerable = true;
-descriptor .value = function wave ( value, partial ) {
+descriptor .value = function wave ( value, partials ) {
 
 const oscilla = this;
+
+partials .forEach ( ( partial ) => {
 
 oscilla [ partial ] .wave = domain [ value ] ? domain [ value ] : domain [ '1' ];
 
@@ -21,5 +23,7 @@ detail: partial
 
 } )
 );
+
+} );
 
 };

@@ -2,14 +2,14 @@ export const descriptor = {};
 
 descriptor .enumerable = true;
 
-descriptor .value = function attack ( note, ... partials ) {
+descriptor .value = function attack ( note, partials ) {
 
 const oscilla = this;
 
 if ( !oscilla .key [ Math .abs ( note ) ] )
 return;
 
-oscilla .tune ( note, ... partials );
+oscilla .tune ( note, partials );
 
 partials .forEach ( ( partial ) => {
 

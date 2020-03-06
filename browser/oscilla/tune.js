@@ -2,7 +2,7 @@ export const descriptor = {};
 
 descriptor .enumerable = true;
 
-descriptor .value = function tune ( note, ... partials ) {
+descriptor .value = function tune ( note, partials ) {
 
 const oscilla = this;
 

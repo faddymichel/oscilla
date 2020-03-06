@@ -2,12 +2,14 @@ export const descriptor = {};
 
 descriptor .enumerable = true;
 
-descriptor .value = function detune ( octave, partial ) {
+descriptor .value = function detune ( octave, partials ) {
 
 if ( isNaN ( octave ) )
 return;
 
 const oscilla = this;
+
+partials .forEach ( ( partial ) => {
 
 oscilla [ partial ] .detune += octave;
 
@@ -18,5 +20,7 @@ detail: partial
 
 } )
 );
+
+} );
 
 };
