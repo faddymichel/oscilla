@@ -11,21 +11,19 @@ return;
 
 oscilla .tune ( note, partials );
 
-partials .forEach ( ( partial ) => {
+partials .forEach ( ( symbol ) => {
 
-oscilla .key [ note ] [ partial ]
-.amplifier
-.gain
+const partial = oscilla .key [ note ] [ symbol ];
+
+partial .amplifier .offset
 .linearRampToValueAtTime (
-oscilla [ partial ] .loudness,
+oscilla [ symbol ] .loudness,
 oscilla .currentTime + oscilla .attackTime
 );
 
-oscilla .key [ note ] [ partial ]
-.amplifier
-.gain
+partial .amplifier .offset
 .linearRampToValueAtTime (
-oscilla [ partial ] .loudness * oscilla .sustain,
+oscilla [ symbol ] .loudness * oscilla .sustain,
 oscilla .currentTime + oscilla .attackTime + oscilla .decayTime
 );
 

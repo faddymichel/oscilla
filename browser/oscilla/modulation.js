@@ -2,7 +2,7 @@ export const descriptor = {};
 
 descriptor .enumerable = true;
 
-descriptor .value = function loudness ( value, partials ) {
+descriptor .value = function modulation ( value, partials ) {
 
 if ( isNaN ( value ) )
 return;
@@ -11,10 +11,10 @@ const oscilla = this;
 
 partials .forEach ( ( partial ) => {
 
-oscilla [ partial ] .loudness += value;
+oscilla [ partial ] .modulation += value;
 
 oscilla .dispatchEvent (
-new CustomEvent ( 'loudness', {
+new CustomEvent ( 'modulation', {
 
 detail: partial
 

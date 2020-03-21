@@ -34,11 +34,7 @@ oscilla [ setting .adsr ] * 100
 ) + value
 ) / 100;
 
-console .log ( setting .adsr, oscilla [ setting .adsr ] );
-
 }
-
-console .log ( setting .adsr );
 
 }
 

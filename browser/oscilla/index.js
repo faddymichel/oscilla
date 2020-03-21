@@ -2,6 +2,7 @@ import { descriptor as partial } from './partial.js';
 import { descriptor as tune } from './tune.js';
 import { descriptor as attack } from './attack.js';
 import { descriptor as release } from './release.js';
+import { descriptor as modulation } from './modulation.js';
 import { descriptor as loudness } from './loudness.js';
 import { descriptor as wave } from './wave.js';
 import { descriptor as detune } from './detune.js';
@@ -16,7 +17,6 @@ super ();
 
 const oscilla = this;
 
-oscilla .loudness = .3;
 oscilla .attackTime = 0;
 oscilla .decayTime = 0;
 oscilla .sustain = .15;
@@ -43,6 +43,8 @@ oscilla .key [ note ]
 };
 
 Object .defineProperty ( Oscilla .prototype, 'partial', partial );
+Object .defineProperty ( Oscilla .prototype, 'modulation', modulation );
+Object .defineProperty ( Oscilla .prototype, 'loudness', loudness );
 Object .defineProperty ( Oscilla .prototype, 'tune', tune );
 Object .defineProperty ( Oscilla .prototype, 'detune', detune );
 Object .defineProperty ( Oscilla .prototype, 'wave', wave );

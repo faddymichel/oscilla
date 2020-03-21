@@ -15,14 +15,7 @@ let note = 1 + keys .indexOf ( event .key );
 
 if ( !event .repeat && note > 0 ) {
 
-if ( multiphonic .play && multiphonic .oscilla .length > 0 )
-multiphonic .oscilla .forEach ( ( oscilla ) => {
-
-oscilla .pitch ( note );
-
-} );
-
-else if ( setting .oscilla )
+if ( setting .oscilla )
 
 if ( event .type === 'keydown' && !attacked [ note ] ) {
 

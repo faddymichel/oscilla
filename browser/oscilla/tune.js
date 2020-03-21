@@ -6,40 +6,44 @@ descriptor .value = function tune ( note, partials ) {
 
 const oscilla = this;
 
-partials .forEach ( ( partial ) => {
+partials .forEach ( ( symbol ) => {
 
-oscilla .key [ note ] [ partial ] = {};
+const partial = oscilla .key [ note ] [ symbol ] = {};
 
-oscilla .key [ note ] [ partial ]
-.amplifier = oscilla .createGain ();
+partial .pitch = oscilla .createOscillator ();
+partial .pitchAmplifier = oscilla .createGain ();
 
-oscilla .key [ note ] [ partial ]
-.amplifier
-.gain .value = 0;
+partial .modulator = oscilla .createOscillator ();
+partial .modulatorAmplifier = oscilla .createGain ();
 
-oscilla .key [ note ] [ partial ]
-.oscillator = oscilla .createOscillator ();
+partial .amplifier = oscilla .createConstantSource ();
 
-oscilla .key [ note ] [ partial ]
-.oscillator
-.type = oscilla [ partial ] .wave;
+partial .pitchAmplifier .gain .value
+= partial .modulatorAmplifier .gain .value
+= 0;
 
-oscilla .key [ note ] [ partial ]
-.oscillator
-.frequency .value = oscilla .key [ note ] .frequency;
+partial .pitch .type = oscilla [ symbol ] .wave;
+partial .pitch .frequency .value = oscilla .key [ note ] .frequency;
 
-oscilla .key [ note ] [ partial ]
-.oscillator
-.detune .value = parseInt ( oscilla [ partial ] .detune * 100 * oscilla .steps );
+partial .pitch .detune .value = parseInt ( oscilla [ symbol ] .detune * 100 * oscilla .steps );
 
 oscilla .addEventListener ( 'octave', ( event ) => {
 
 if ( event .detail === partial )
-oscilla .key [ note ] [ partial ]
-.oscillator
-.detune
+partial .pitch .detune
 .setValueAtTime (
-parseInt ( oscilla [ partial ] .detune * 100 * oscilla .steps ),
+parseInt ( oscilla [ symbol ] .detune * 100 * oscilla .steps ),
+oscilla .currentTime
+);
+
+}, false );
+
+oscilla .addEventListener ( 'modulation', ( event ) => {
+
+if ( event .detail === partial )
+partial .modulator .frequency
+.setValueAtTime (
+oscilla [ symbol ] .modulation,
 oscilla .currentTime
 );
 
@@ -48,24 +52,39 @@ oscilla .currentTime
 oscilla .addEventListener ( 'wave', ( event ) => {
 
 if ( event .detail === partial )
-oscilla .key [ note ] [ partial ]
-.oscillator
-.type = oscilla [ partial ] .wave;
+partial .pitch .type = oscilla [ symbol ] .wave;
 
 }, false );
 
-oscilla .key [ note ] [ partial ]
-.oscillator
-.connect (
-oscilla .key [ note ] [ partial ]
-.amplifier
+partial .modulator .frequency .value = oscilla [ symbol ] .modulation;
+
+partial .amplifier .offset .value = 0;
+
+partial .amplifier .connect (
+partial .pitchAmplifier .gain
+);
+
+partial .amplifier .connect (
+partial .modulatorAmplifier .gain
+);
+
+partial .modulator .connect (
+partial .modulatorAmplifier
+);
+
+partial .modulatorAmplifier .connect (
+partial .pitchAmplifier .gain
+);
+
+partial .pitch .connect (
+partial .pitchAmplifier
 ) .connect (
 oscilla .destination
 );
 
-oscilla .key [ note ] [ partial ]
-.oscillator
-.start ();
+partial .amplifier .start ();
+partial .modulator .start ();
+partial .pitch .start ();
 
 } );
 

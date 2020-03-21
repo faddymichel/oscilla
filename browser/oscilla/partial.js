@@ -13,7 +13,8 @@ value: {
 
 wave: attributes .wave,
 detune: attributes .detune || 0,
-loudness: attributes .loudness || oscilla .loudness
+loudness: attributes .loudness || .15,
+modulation: attributes .modulation || 0
 
 }
 

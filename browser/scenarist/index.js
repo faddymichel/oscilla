@@ -4,6 +4,11 @@ import { descriptor as play } from './play.js';
 
 export const scenarist = {};
 
+Object .defineProperty ( scenarist, 'scenarios', {
+
+value: {}
+
+} );
 Object .defineProperty ( scenarist, 'lines', {
 
 value: []

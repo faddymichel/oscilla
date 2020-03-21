@@ -9,33 +9,33 @@ const oscilla = this;
 if ( !oscilla .key [ Math .abs ( note ) ] )
 return;
 
-partials .forEach ( ( partial ) => {
+partials .forEach ( ( symbol ) => {
 
-oscilla .key [ note ] [ partial ]
-.amplifier
-.gain
+const partial = oscilla .key [ note ] [ symbol ];
+
+partial .amplifier .offset
 .cancelScheduledValues (
 oscilla .currentTime + oscilla .releaseTime
 );
 
-oscilla .key [ note ] [ partial ]
-.amplifier
-.gain
+partial .amplifier .offset
 .linearRampToValueAtTime (
-oscilla [ partial ] .loudness * oscilla .sustain,
+oscilla [ symbol ] .loudness * oscilla .sustain,
 oscilla .currentTime
 );
 
-oscilla .key [ note ] [ partial ]
-.amplifier
-.gain
+partial .amplifier .offset
 .linearRampToValueAtTime (
 0,
 oscilla .currentTime + oscilla .releaseTime
 );
 
-oscilla .key [ note ] [ partial ]
-.oscillator
+partial .pitch
+.stop (
+oscilla .currentTime + oscilla .releaseTime
+);
+
+partial .modulator
 .stop (
 oscilla .currentTime + oscilla .releaseTime
 );
