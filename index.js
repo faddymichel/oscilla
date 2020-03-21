@@ -1,16 +1,16 @@
-import { scenarist } from '/scenarist/index.js';
-import { Oscilla } from '/oscilla/index.js';
+import { scenarist } from '/oscilla/scenarist/index.js';
+import { Oscilla } from '/oscilla/oscilla/index.js';
 
 window .onload = () => {
 
 const carrier = scenarist .create (
 'carrier',
-'/timbre.js',
-'/pitch.js',
-'/octave.js',
-'/wave.js',
-'/loudness.js',
-'/adsr.js'
+'/oscilla/timbre.js',
+'/oscilla/pitch.js',
+'/oscilla/octave.js',
+'/oscilla/wave.js',
+'/oscilla/loudness.js',
+'/oscilla/adsr.js'
 );
 
 document .onkeydown = document .onkeyup = ( event ) => {
