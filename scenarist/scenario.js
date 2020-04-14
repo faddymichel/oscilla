@@ -4,20 +4,22 @@ export const descriptor = {};
 
 descriptor .enumerable = true;
 
-descriptor .value = function create ( name, ... paths ) {
+descriptor .value = function scenario ( name, ... paths ) {
 
-if ( typeof name !== 'string' )
+if ( typeof name !== 'string' && typeof name !== 'symbol' )
 return;
 
 const scenarist = this;
-const scenario = scenarist .scenario = scenarist .scenarios [ name ] = new Scenario ();
+scenarist .scenarios [ name ] = new Scenario ();
 
 paths .forEach ( ( path ) => {
 
 import ( path )
 .then ( ( module ) => {
 
-scenario .create (
+scenarist
+.scenarios [ name ]
+.scene (
 module .character,
 module .setting
 );

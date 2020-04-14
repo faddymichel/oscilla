@@ -1,9 +1,11 @@
-import { scenarist } from '/oscilla/scenarist/index.js';
+import { Scenarist } from '/oscilla/scenarist/index.js';
 import { Oscilla } from '/oscilla/oscilla/index.js';
 
 window .onload = () => {
 
-const carrier = scenarist .create (
+const scenarist = new Scenarist ();
+
+scenarist .scenario (
 'carrier',
 '/oscilla/timbre.js',
 '/oscilla/pitch.js',
@@ -13,10 +15,14 @@ const carrier = scenarist .create (
 '/oscilla/adsr.js'
 );
 
+scenarist .display = 'carrier';
+
+/*
 document .onkeydown = document .onkeyup = ( event ) => {
 
 scenarist .play ( event );
 
 };
+*/
 
 };

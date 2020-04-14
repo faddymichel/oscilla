@@ -1,10 +1,10 @@
-import { descriptor as create } from './create.js';
+import { descriptor as scene } from './scene.js';
 
 export const Scenario = function Scenario () {
 
 const scenario = this;
 
-Object .defineProperty ( scenario, 'character', {
+Object .defineProperty ( scenario, 'scenes', {
 
 value: {}
 
@@ -17,4 +17,4 @@ value: {}
 
 };
 
-Object .defineProperty ( Scenario .prototype, 'create', create );
+Object .defineProperty ( Scenario .prototype, 'scene', scene );

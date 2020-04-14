@@ -6,30 +6,29 @@ descriptor .value = function write ( element, content ) {
 
 const { lines } = this;
 let tag;
+let type;
 
 switch ( element ) {
 
 case 'title':
 
 tag = 'h1';
+type = 'title';
 
 break;
 case 'heading':
 
 tag = 'h2';
+type = 'heading';
 
 }
 
-lines .push (
-m ( tag, {
+const line = document .createElement ( tag );
+line .class = type;
+line .textContent = content;
 
-id: lines .length
+lines .appendChild ( line );
 
-}, content )
-);
-
-m .render ( document .body, lines );
-
-window .location .hash = lines .length - 1;
+//window .location .hash = lines .length - 1;
 
 };
