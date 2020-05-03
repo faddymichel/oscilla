@@ -2,33 +2,34 @@ import { Oscilla } from './oscilla/index.js';
 
 export const setting = {};
 setting .timbre = [];
+setting .chorus = false;
 
 export const character = {};
-character .name = 'timbre';
+character .events = [ 'timbre' ];
 character .cast = 'Ytyu';
 character .action = function action ( event ) {
+
+if ( typeof event !== 'object' )
+return;
 
 const setting = this;
 const { scenarist, timbre, pitch, steps, keys } = setting;
 
-if ( typeof event === 'object' && event .type !== 'keyup' )
-return;
+switch ( event .character ) {
 
-else if ( typeof event === 'string' )
-event = event
-.split ( ' ' )
-.splice ( 1 );
-
-scenarist .write ( 'heading', character .name );
-
-switch ( event .key || event [ 0 ] ) {
-
+case 'chorus':
 case 'Y':
 
-timbre .unshift ( setting .partial .pop () );
+setting .chorus = ! setting .chorus;
+
+if ( setting .chorus )
 setting .partial = timbre;
 
+else
+setting .partial = [ timbre [ setting .index ] ];
+
 break;
+case 'solo':
 case 'y':
 case 'partial':
 
@@ -42,29 +43,23 @@ keys: keys .length
 
 } );
 
-const partial = setting .oscilla .partial ( {} );
+timbre .push ( setting .oscilla .partial ( {} ) );
+setting .index = timbre .length - 1;
 
-if ( setting .partial ) {
-
-timbre .unshift ( setting .partial .pop () );
-
-}
-
-setting .partial = [ partial ];
+setting .partial = [ timbre [ setting .index ] ];
 
 break;
 case 'u':
 case 'next':
 
-timbre .unshift ( setting .partial .pop () );
-setting .partial = [ timbre .pop () ];
+
+setting .partial = [ timbre [ ++setting .index ] ];
 
 break;
 case 't':
 case 'previous':
 
-timbre .push ( setting .partial .pop () );
-setting .partial = [ timbre .shift () ];
+setting .partial = [ timbre [ --setting .index ] ];
 
 }
 

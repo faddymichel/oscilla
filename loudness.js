@@ -1,17 +1,34 @@
-export const character = {};
+export const setting = {};
+setting .loudness = 64;
 
+export const character = {};
+character .events = [ 'loudness' ];
 character .cast = '-=';
 character .action = function action ( event ) {
 
-const { partial, oscilla } = this;
+const setting = this;
+const { partial, oscilla } = setting;
 
-if ( event .type === 'keyup' ) {
+if ( event .scene .split ( ':' ) [ 1 ] === 'on' )
+return;
 
-oscilla .loudness ( (
-character .cast .indexOf ( event .key ) === 0 ?
--.05 : .05
-), partial );
+switch ( event .character ) {
+
+case '=':
+case 'up':
+
+if ( setting .loudness < 127 )
+setting .loudness++;
+
+break;
+case '-':
+case 'down':
+
+if ( setting .loudness > 0 )
+setting .loudness--;
 
 }
+
+oscilla .loudness ( setting .loudness / 127, partial );
 
 };

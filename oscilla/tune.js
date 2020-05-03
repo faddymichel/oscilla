@@ -8,7 +8,7 @@ const oscilla = this;
 
 partials .forEach ( ( symbol ) => {
 
-const partial = oscilla .key [ note ] [ symbol ] = {};
+const partial = oscilla .key [ note ] [ symbol ] = oscilla .key .legato [ symbol ] = {};
 
 partial .pitch = oscilla .createOscillator ();
 partial .pitchAmplifier = oscilla .createGain ();
@@ -25,7 +25,15 @@ partial .pitchAmplifier .gain .value
 partial .pitch .type = oscilla [ symbol ] .wave;
 partial .pitch .frequency .value = oscilla .key [ note ] .frequency;
 
-partial .pitch .detune .value = parseInt ( oscilla [ symbol ] .detune * 100 * oscilla .steps );
+let cents = parseInt ( oscilla [ symbol ] .detune * 100 * oscilla .steps );
+
+if ( cents === 0 ) {
+
+cents = -partial .pitch .detune .value;
+
+}
+
+partial .pitch .detune .value = cents;
 
 oscilla .addEventListener ( 'octave', ( event ) => {
 
@@ -87,5 +95,7 @@ partial .modulator .start ();
 partial .pitch .start ();
 
 } );
+
+oscilla .key [ note ] .attacked = true;
 
 };

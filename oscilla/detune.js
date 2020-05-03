@@ -11,7 +11,7 @@ const oscilla = this;
 
 partials .forEach ( ( partial ) => {
 
-oscilla [ partial ] .detune += octave;
+oscilla [ partial ] .detune = octave;
 
 oscilla .dispatchEvent (
 new CustomEvent ( 'octave', {

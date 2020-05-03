@@ -1,31 +1,53 @@
-let attacked = {};
-
 export const setting = {};
 setting .keys = "qawsedrfjikolp;[']";
 setting .pitch = 'l';
 setting .steps = 12;
+setting .pitchMidi = 69;
+setting .marginSteps = 1 + setting .keys .indexOf ( setting .pitch ) - setting .pitchMidi % setting .steps;
+setting .octaveMidi = parseInt ( setting .pitchMidi / setting .steps );
 
 export const character = {};
+character .events = [
+'pitch',
+'note',
+128,
+144
+];
 character .cast = setting .keys;
 character .action = function action ( event ) {
 
 const setting = this;
-const { multiphonic, keys } = setting;
-let note = 1 + keys .indexOf ( event .key );
+const { oscilla, partial, keys, steps, marginSteps } = setting;
+let note;
 
-if ( !event .repeat && note > 0 ) {
+if ( typeof event .scene === 'string' && event .character .length === 1 )
+note = isNaN ( parseInt ( event .character ) ) ? 1 + keys .indexOf ( event .character ) : parseInt ( event .character );
 
-if ( setting .oscilla )
+else if ( typeof event .scene === 'number' ) {
 
-if ( event .type === 'keydown' && !attacked [ note ] ) {
+note = marginSteps + event .character % steps;
+setting .octave = parseInt ( event .character / steps ) - setting .octaveMidi;
 
-attacked [ note ] = true;
-setting .oscilla .attack ( note, setting .partial );
+}
 
-} else if ( event .type === 'keyup' && attacked [ note ] ) {
+if ( note > 0 && oscilla ) {
 
-setting .oscilla .release ( note, setting .partial );
-attacked [ note ] = false;
+switch ( typeof event .scene === 'number' ? event .scene : event .scene .split ( ':' ) [ 1 ] ) {
+
+case 'on':
+case 144:
+
+if ( ! isNaN ( setting .octave ) )
+setting .oscilla .detune ( setting .octave, setting .partial );
+
+setting .oscilla .attack ( note, false, setting .partial );
+
+break;
+
+case 'off':
+case 128:
+
+setting .oscilla .release ( note, false, setting .partial );
 
 }
 

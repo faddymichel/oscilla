@@ -1,13 +1,36 @@
+export const setting = {};
+setting .octave = 0;
+
 export const character = {};
+character .events = [ 'octave', 'detune' ];
 character .cast = 'gh';
 character .action = function action ( event ) {
 
-const { partial, oscilla } = this;
+const setting = this;
+const { partial, oscilla } = setting;
 
-if ( event .type === 'keyup' )
-oscilla .detune (
-character .cast .indexOf ( event .key ) === 0 ? -1 : 1,
-partial
-);
+if ( event .scene .split ( ':' ) [ 1 ] === 'on' )
+return;
+
+switch ( event .character ) {
+
+case 'h':
+case 'high':
+case 'up':
+
+if ( setting .octave < 5 )
+setting .octave++;
+
+break;
+case 'g':
+case 'low':
+case 'down':
+
+if ( setting .octave > -5 )
+setting .octave--;
+
+}
+
+oscilla .detune ( setting .octave, partial );
 
 };

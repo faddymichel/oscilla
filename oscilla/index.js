@@ -23,6 +23,7 @@ oscilla .sustain = .15;
 oscilla .releaseTime = 0;
 
 oscilla .key = {};
+oscilla .key .legato = {};
 oscilla .steps = tuning .steps;
 
 for (

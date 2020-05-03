@@ -2,7 +2,7 @@ export const descriptor = {};
 
 descriptor .enumerable = true;
 
-descriptor .value = function release ( note, partials ) {
+descriptor .value = function release ( note, legato, partials ) {
 
 const oscilla = this;
 
@@ -41,5 +41,7 @@ oscilla .currentTime + oscilla .releaseTime
 );
 
 } );
+
+oscilla .key [ note ] .attacked = false;
 
 };
