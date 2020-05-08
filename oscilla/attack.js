@@ -2,31 +2,31 @@ export const descriptor = {};
 
 descriptor .enumerable = true;
 
-descriptor .value = function attack ( note, legato, partials ) {
+descriptor .value = function attack ( note, legato ) {
 
 const oscilla = this;
 
 if ( !oscilla .key [ note ] || oscilla .key [ note ] .attacked )
 return;
 
-oscilla .tune ( note, partials );
+oscilla .tune ( note );
 
-partials .forEach ( ( symbol ) => {
+for ( const partial of oscilla .partials ) {
 
-const partial = legato ? oscilla .key [ note ] [ symbol ] : oscilla .key .legato [ symbol ];
-
-partial .amplifier .offset
+partial [ note ] .amplifier .offset
 .linearRampToValueAtTime (
-oscilla [ symbol ] .loudness,
+partial .attributes .loudness .value,
 oscilla .currentTime + oscilla .attackTime
 );
 
-partial .amplifier .offset
+partial [ note ] .amplifier .offset
 .linearRampToValueAtTime (
-oscilla [ symbol ] .loudness * oscilla .sustain,
+partial .attributes .loudness .value * oscilla .sustain,
 oscilla .currentTime + oscilla .attackTime + oscilla .decayTime
 );
 
-} );
+}
+
+oscilla .key [ note ] .attacked = true;
 
 };

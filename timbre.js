@@ -1,35 +1,31 @@
 import { Oscilla } from './oscilla/index.js';
 
-export const setting = {};
-setting .timbre = [];
-setting .chorus = false;
-
 export const character = {};
 character .events = [ 'timbre' ];
 character .cast = 'Ytyu';
 character .action = function action ( event ) {
 
-if ( typeof event !== 'object' )
+if ( event .scene && event .scene .split ( ':' ) [ 1 ] === 'on' )
 return;
 
 const setting = this;
-const { scenarist, timbre, pitch, steps, keys } = setting;
+const { scenarist, pitch, steps, keys } = setting;
 
 switch ( event .character ) {
 
 case 'chorus':
+case 'solo':
 case 'Y':
 
-setting .chorus = ! setting .chorus;
 
-if ( setting .chorus )
-setting .partial = timbre;
+console .log ( 'before:', setting .oscilla .multiphonic );
 
-else
-setting .partial = [ timbre [ setting .index ] ];
+setting .oscilla .multiphonic = event .character === 'Y' ? ! setting .oscilla .multiphonic :
+event .character === 'chorus' ? true : false;
+
+console .log ( 'after:', setting .oscilla .multiphonic );
 
 break;
-case 'solo':
 case 'y':
 case 'partial':
 
@@ -43,23 +39,19 @@ keys: keys .length
 
 } );
 
-timbre .push ( setting .oscilla .partial ( {} ) );
-setting .index = timbre .length - 1;
-
-setting .partial = [ timbre [ setting .index ] ];
+setting .oscilla .partial ( {} );
 
 break;
 case 'u':
 case 'next':
 
-
-setting .partial = [ timbre [ ++setting .index ] ];
+setting .oscilla .focus ( 'next' );
 
 break;
 case 't':
 case 'previous':
 
-setting .partial = [ timbre [ --setting .index ] ];
+setting .oscilla .focus ( 'previous' );
 
 }
 

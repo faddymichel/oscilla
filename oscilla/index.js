@@ -1,4 +1,6 @@
 import { descriptor as partial } from './partial.js';
+import { descriptor as partials } from './partials.js';
+import { descriptor as focus } from './focus.js';
 import { descriptor as tune } from './tune.js';
 import { descriptor as attack } from './attack.js';
 import { descriptor as release } from './release.js';
@@ -21,6 +23,7 @@ oscilla .attackTime = 0;
 oscilla .decayTime = 0;
 oscilla .sustain = .15;
 oscilla .releaseTime = 0;
+oscilla .multiphonic = false;
 
 oscilla .key = {};
 oscilla .key .legato = {};
@@ -44,6 +47,8 @@ oscilla .key [ note ]
 };
 
 Object .defineProperty ( Oscilla .prototype, 'partial', partial );
+Object .defineProperty ( Oscilla .prototype, 'partials', partials );
+Object .defineProperty ( Oscilla .prototype, 'focus', focus );
 Object .defineProperty ( Oscilla .prototype, 'modulation', modulation );
 Object .defineProperty ( Oscilla .prototype, 'loudness', loudness );
 Object .defineProperty ( Oscilla .prototype, 'tune', tune );

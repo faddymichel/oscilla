@@ -17,7 +17,7 @@ character .cast = setting .keys;
 character .action = function action ( event ) {
 
 const setting = this;
-const { oscilla, partial, keys, steps, marginSteps } = setting;
+const { oscilla, keys, steps, marginSteps } = setting;
 let note;
 
 if ( typeof event .scene === 'string' && event .character .length === 1 )
@@ -26,7 +26,7 @@ note = isNaN ( parseInt ( event .character ) ) ? 1 + keys .indexOf ( event .char
 else if ( typeof event .scene === 'number' ) {
 
 note = marginSteps + event .character % steps;
-setting .octave = parseInt ( event .character / steps ) - setting .octaveMidi;
+setting .detune = parseInt ( event .character / steps ) - setting .octaveMidi;
 
 }
 
@@ -37,17 +37,17 @@ switch ( typeof event .scene === 'number' ? event .scene : event .scene .split (
 case 'on':
 case 144:
 
-if ( ! isNaN ( setting .octave ) )
-setting .oscilla .detune ( setting .octave, setting .partial );
+if ( ! isNaN ( setting .detune ) )
+setting .oscilla .detune ( setting .detune, setting .timbre );
 
-setting .oscilla .attack ( note, false, setting .partial );
+setting .oscilla .attack ( note, false, setting .timbre );
 
 break;
 
 case 'off':
 case 128:
 
-setting .oscilla .release ( note, false, setting .partial );
+setting .oscilla .release ( note, false, setting .timbre );
 
 }
 

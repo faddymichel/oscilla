@@ -1,13 +1,12 @@
 export const setting = {};
-setting .octave = 0;
 
 export const character = {};
-character .events = [ 'octave', 'detune' ];
+character .events = [ 'detune', 'octave' ];
 character .cast = 'gh';
 character .action = function action ( event ) {
 
 const setting = this;
-const { partial, oscilla } = setting;
+const { timbre, oscilla } = setting;
 
 if ( event .scene .split ( ':' ) [ 1 ] === 'on' )
 return;
@@ -18,19 +17,17 @@ case 'h':
 case 'high':
 case 'up':
 
-if ( setting .octave < 5 )
-setting .octave++;
+setting .oscilla .detune ( 1 );
 
 break;
 case 'g':
 case 'low':
 case 'down':
 
-if ( setting .octave > -5 )
-setting .octave--;
+setting .oscilla .detune ( -1 );
 
 }
 
-oscilla .detune ( setting .octave, partial );
+oscilla .detune ( setting .detune, timbre );
 
 };

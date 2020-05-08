@@ -8,13 +8,13 @@ domain [ '4' ] = 'triangle';
 export const descriptor = {};
 
 descriptor .enumerable = true;
-descriptor .value = function wave ( value, partials ) {
+descriptor .value = function wave ( value ) {
 
 const oscilla = this;
 
-partials .forEach ( ( partial ) => {
+for ( const partial of oscilla .partials ) {
 
-oscilla [ partial ] .wave = domain [ value ] ? domain [ value ] : domain [ '1' ];
+partial .attributes .wave = domain [ value ] ? domain [ value ] : domain [ '1' ];
 
 oscilla .dispatchEvent (
 new CustomEvent ( 'wave', {
@@ -24,6 +24,6 @@ detail: partial
 } )
 );
 
-} );
+}
 
 };

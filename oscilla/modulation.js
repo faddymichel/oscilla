@@ -11,7 +11,7 @@ const oscilla = this;
 
 partials .forEach ( ( partial ) => {
 
-oscilla [ partial ] .modulation += value;
+oscilla [ partial ] .attributes .modulation += value;
 
 oscilla .dispatchEvent (
 new CustomEvent ( 'modulation', {
