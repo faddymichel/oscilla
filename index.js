@@ -8,11 +8,11 @@ const scenarist = new Scenarist ();
 scenarist .scenario (
 'carrier',
 '/oscilla/timbre.js',
-'/oscilla/pitch.js',
+'/oscilla/pitch/index.js',
 '/oscilla/octave.js',
 '/oscilla/wave.js',
 '/oscilla/loudness.js',
-'/oscilla/adsr.js'
+//'/oscilla/adsr.js'
 );
 
 scenarist .display = 'carrier';

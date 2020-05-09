@@ -2,10 +2,10 @@ export const descriptor = {};
 
 descriptor .enumerable = true;
 
-descriptor .value = function scene ( character, setting ) {
+descriptor .value = function scene ( { characters, setting } ) {
 
 const scenario = this;
-const { events, cast, action } = character;
+const { events, cast, action } = characters;
 const role = Symbol ();
 
 for ( let i = 0; i < cast .length; i++ )

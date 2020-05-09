@@ -12,19 +12,15 @@ return;
 const scenarist = this;
 scenarist .scenarios [ name ] = new Scenario ();
 
-paths .forEach ( ( path ) => {
-
+for ( const path of paths )
 import ( path )
-.then ( ( module ) => {
+.then ( ( scene ) => {
 
 scenarist
 .scenarios [ name ]
 .scene (
-module .character,
-module .setting
+scene
 );
-
-} );
 
 } );
 

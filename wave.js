@@ -1,7 +1,7 @@
-export const character = {};
-character .events = [ 'wave' ];
-character .cast = '1234';
-character .action = function action ( event ) {
+export const characters = {};
+characters .events = [ 'wave' ];
+characters .cast = '1234';
+characters .action = function action ( event ) {
 
 const { timbre, oscilla } = this;
 

@@ -1,9 +1,9 @@
 export const setting = {};
 
-export const character = {};
-character .events = [ 'detune', 'octave' ];
-character .cast = 'gh';
-character .action = function action ( event ) {
+export const characters = {};
+characters .events = [ 'detune', 'octave' ];
+characters .cast = 'gh';
+characters .action = function action ( event ) {
 
 const setting = this;
 const { timbre, oscilla } = setting;

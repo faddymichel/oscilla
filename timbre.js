@@ -1,9 +1,9 @@
 import { Oscilla } from './oscilla/index.js';
 
-export const character = {};
-character .events = [ 'timbre' ];
-character .cast = 'Ytyu';
-character .action = function action ( event ) {
+export const characters = {};
+characters .events = [ 'timbre' ];
+characters .cast = 'Ytyu';
+characters .action = function action ( event ) {
 
 if ( event .scene && event .scene .split ( ':' ) [ 1 ] === 'on' )
 return;

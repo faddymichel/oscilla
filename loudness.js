@@ -1,7 +1,7 @@
-export const character = {};
-character .events = [ 'loudness' ];
-character .cast = '-=';
-character .action = function action ( event ) {
+export const characters = {};
+characters .events = [ 'loudness' ];
+characters .cast = '-=';
+characters .action = function action ( event ) {
 
 const setting = this;
 const { partial, oscilla } = setting;
