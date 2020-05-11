@@ -19,8 +19,6 @@ characters .events = [
 characters .cast = setting .keys;
 characters .action = function action ( event ) {
 
-console .log ( 'yallah' );
-
 const setting = this;
 const { oscilla, keys, steps, marginSteps } = setting;
 let note;

@@ -11,7 +11,7 @@ name: 'carrier',
 paths: [
 
 '/oscilla/ascii.js',
-'/oscilla/midi.js',
+//'/oscilla/midi.js',
 '/oscilla/timbre.js',
 '/oscilla/pitch/index.js',
 '/oscilla/octave.js',
