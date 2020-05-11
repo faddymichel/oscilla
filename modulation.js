@@ -3,15 +3,8 @@ export const character = {};
 character .cast = './';
 character .action = function action ( event ) {
 
-const { partial, oscilla } = this;
+const setting = this;
 
-if ( event .type === 'keyup' ) {
-
-oscilla .modulation ( (
-character .cast .indexOf ( event .key ) === 0 ?
--.05 : .05
-), partial );
-
-}
+setting .oscilla .modulation ();
 
 };

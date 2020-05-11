@@ -1,4 +1,7 @@
-export const setting = {};
+import { establishment } from './establishment.js';
+
+const setting = {};
+
 setting .keys = "qawsedrfjikolp;[']";
 setting .pitch = 'l';
 setting .steps = 12;
@@ -6,15 +9,17 @@ setting .pitchMidi = 69;
 setting .marginSteps = 1 + setting .keys .indexOf ( setting .pitch ) - setting .pitchMidi % setting .steps;
 setting .octaveMidi = parseInt ( setting .pitchMidi / setting .steps );
 
-export const character = {};
-character .events = [
+const characters = {};
+characters .events = [
 'pitch',
 'note',
 128,
 144
 ];
-character .cast = setting .keys;
-character .action = function action ( event ) {
+characters .cast = setting .keys;
+characters .action = function action ( event ) {
+
+console .log ( 'yallah' );
 
 const setting = this;
 const { oscilla, keys, steps, marginSteps } = setting;
@@ -52,5 +57,13 @@ setting .oscilla .release ( note, false, setting .timbre );
 }
 
 }
+
+};
+
+export {
+
+establishment,
+characters,
+setting
 
 };

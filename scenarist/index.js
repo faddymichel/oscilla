@@ -1,19 +1,21 @@
-import { descriptor as create } from './create.js';
+import { descriptor as scenario } from './scenario.js';
 import { descriptor as write } from './write.js';
 import { descriptor as play } from './play.js';
+import { descriptor as establish } from './establish.js';
 
-export const scenarist = {};
+export const Scenarist = function Scenarist () {
+
+const scenarist = this;
 
 Object .defineProperty ( scenarist, 'scenarios', {
 
 value: {}
 
 } );
-Object .defineProperty ( scenarist, 'lines', {
 
-value: []
+};
 
-} );
-Object .defineProperty ( scenarist, 'create', create );
-Object .defineProperty ( scenarist, 'write', write );
-Object .defineProperty ( scenarist, 'play', play );
+Object .defineProperty ( Scenarist .prototype, 'scenario', scenario );
+Object .defineProperty ( Scenarist .prototype, 'write', write );
+Object .defineProperty ( Scenarist .prototype, 'play', play );
+Object .defineProperty ( Scenarist .prototype, 'establish', establish );

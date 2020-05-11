@@ -5,17 +5,13 @@ descriptor .enumerable = true;
 descriptor .value = function play ( event ) {
 
 const scenarist = this;
-const { scenario } = scenarist;
-
-const role = scenario .character [ event .key ];
+const scenario = scenarist .scenarios [ scenarist .display ];
+const role = scenario .scenes [ typeof event .scene === 'number' ? event .scene : event .scene .split ( ':' ) [ 0 ] ];
 
 if ( role ) {
 
-const { action } = scenario .character [ role ];
-action .call (
-Object .assign ( scenario .setting, { scenarist } ),
-event
-);
+const { action } = scenario .scenes [ role ];
+action .call ( scenario .setting, event );
 
 }
 
