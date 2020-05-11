@@ -2,20 +2,33 @@ export const descriptor = {};
 
 descriptor .enumerable = true;
 
-descriptor .value = function scene ( { characters, setting } ) {
+descriptor .value = function scene ( { characters, setting, establishment } ) {
 
 const scenario = this;
+const signature = Symbol ();
+scenario .scenes [ signature ] = {};
+
+if ( typeof establishment === 'function' )
+scenario .scenes [ signature ] .establishment = establishment;
+
+if ( typeof characters === 'object' ) {
+
 const { events, cast, action } = characters;
-const role = Symbol ();
 
 for ( let i = 0; i < cast .length; i++ )
-scenario .scenes [ cast [ i ] ] = role;
+scenario .scenes [ cast [ i ] ] = signature;
 
 if ( events && events .length > 0 )
 for ( const event of events )
-scenario .scenes [ event ] = role;
+scenario .scenes [ event ] = signature;
 
-scenario .scenes [ role ] = { action };
+if ( typeof action === 'function' )
+scenario .scenes [ signature ] .action = action;
+
+}
+
 Object .assign ( scenario .setting, setting );
+
+scenario .signatures .push ( signature );
 
 };

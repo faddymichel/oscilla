@@ -11,10 +11,7 @@ const role = scenario .scenes [ typeof event .scene === 'number' ? event .scene 
 if ( role ) {
 
 const { action } = scenario .scenes [ role ];
-action .call (
-Object .assign ( scenario .setting, { scenarist } ),
-event
-);
+action .call ( scenario .setting, event );
 
 }
 

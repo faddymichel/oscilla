@@ -14,6 +14,11 @@ Object .defineProperty ( scenario, 'setting', {
 value: {}
 
 } );
+Object .defineProperty ( scenario, 'signatures', {
+
+value: []
+
+} );
 
 };
 

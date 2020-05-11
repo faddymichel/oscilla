@@ -5,14 +5,25 @@ window .onload = () => {
 
 const scenarist = new Scenarist ();
 
-scenarist .scenario (
-'carrier',
+scenarist .scenario ( {
+
+name: 'carrier',
+paths: [
+
+'/oscilla/ascii.js',
+'/oscilla/midi.js',
 '/oscilla/timbre.js',
 '/oscilla/pitch/index.js',
 '/oscilla/octave.js',
 '/oscilla/wave.js',
 '/oscilla/loudness.js',
 //'/oscilla/adsr.js'
+
+],
+establish: true
+
+}
+
 );
 
 scenarist .display = 'carrier';

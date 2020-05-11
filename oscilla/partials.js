@@ -4,8 +4,6 @@ descriptor .enumerable = true;
 
 const partials = function* partials ( oscilla ) {
 
-console .log ( 'multiphonic:', oscilla .multiphonic );
-
 const pointer = oscilla .pointer;
 
 if ( ! oscilla .multiphonic )
