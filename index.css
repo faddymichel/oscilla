@@ -1,0 +1,20 @@
+svg#keyboard {
+
+max-width: 1000px;
+
+}
+
+svg#keyboard .key {
+
+fill: #fff;
+stroke: #000;
+stroke-linejoin: round;
+stroke-width: 10;
+
+}
+
+svg#keyboard .key.semitone {
+
+fill: #000;
+
+}
