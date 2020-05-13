@@ -5,6 +5,24 @@ window .onload = () => {
 
 const scenarist = new Scenarist ();
 
+scenarist .write ( 'body', 'header' )
+.write ( 'header', 'h1' )
+.write ( 'header h1', 'a', {
+
+href: 'https://github.com/teatro13',
+target: '_blank'
+
+}, 'teatro13' )
+.write ( 'header h1', 'span', {}, ' / ' )
+.write ( 'header h1', 'a', {
+
+href: 'https://github.com/teatro13/oscilla',
+target: '_blank'
+
+}, 'oscilla' )
+.write ( 'body', 'main', { id: 'scenario' } )
+.write ( 'body', 'nav' );
+
 scenarist .scenario ( {
 
 name: 'carrier',

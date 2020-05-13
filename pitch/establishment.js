@@ -3,7 +3,14 @@ export const establishment = function establishment () {
 const { scenarist } = this;
 const namespace = 'http://www.w3.org/2000/svg';
 
-const keyboard = document .createElementNS ( namespace, 'svg' );
+scenarist .write ( 'main', 'section', {
+
+id: 'pitch',
+class: 'scene'
+
+} )
+.write ( 'section#pitch', 'h2', {}, 'Pitch' )
+.write ( 'section#pitch', 'svg', { id: 'keyboard' } );
 
 const radius = 50;
 const gap = .3 * radius;
@@ -26,29 +33,28 @@ continue;
 
 y = i % 2 === 0 ? y : y + radius + gap;
 
-const buttonObject = document .createElementNS ( namespace, 'foreignObject' );
-buttonObject .setAttribute ( 'width', 0 * radius );
-buttonObject .setAttribute ( 'height', 0 * radius );
-buttonObject .setAttribute ( 'x', x );
-buttonObject .setAttribute ( 'y', y );
+const buttonObject = {};
+buttonObject .width = 0 * radius;
+buttonObject .height = 0 * radius;
+buttonObject .x = x;
+buttonObject .y = y;
 
-const button = document .createElement ( 'input' );
+const button = {};
 button .type = 'button';
 button .value = keys [ i ];
 
-const key = document .createElementNS ( namespace, 'polygon' );
+const key = {};
 
-key .setAttribute ( 'id', 'key-' + keys [ i ] );
-key .setAttribute ( 'class', 'key' );
-key .setAttribute ( 'points', [
+key .id = 'key-' + keys [ i ];
+key .class = 'key';
+key .points = [
 
 `${ x + radius },${ y }`,
 `${ x },${ y + radius }`,
 `${ x - radius },${ y }`,
 `${ x },${ y - radius }`
 
-] .join ( ' ' ) );
-
+] .join ( ' ' );
 key .onpointerdown
 = key .onpointerup
 = button .onpointerdown
@@ -64,17 +70,16 @@ character: button .value
 
 };
 
-buttonObject .appendChild ( button );
-keyboard .appendChild ( buttonObject );
-keyboard .appendChild ( key );
+scenarist
+.write ( 'svg#keyboard', 'foreignObject', buttonObject )
+.write ( 'svg#keyboard', 'input', button )
+.write ( 'svg#keyboard', 'polygon', key );
 
 y = i % 2 === 0 ? y : y - radius - gap;
 
 }
 
-keyboard .setAttribute ( 'id', 'pitch' );
-keyboard .setAttribute ( 'viewBox', `0 0 ${ x + radius + gap } ${ y + 2 * radius + gap }` );
-
-document .body .appendChild ( keyboard );
+document .querySelector ( 'svg#keyboard' )
+.viewBox = `0 0 ${ x + radius + gap } ${ y + 2 * radius + gap }`;
 
 };

@@ -2,29 +2,20 @@ export const establishment = function establishment () {
 
 const { scenarist } = this;
 
-const text = document .createElement ( 'input' );
+const text = {};
 text .type = text .id = 'text';
-
-let focus;
-
-text .onfocus = ( event ) => {
-
-focus = true;
-
-};
-
-text .onblur = ( event ) => {
-
-focus = false;
-
-};
+text .placeholder = 'Write a Script to Play';
 
 text .onkeyup = ( event ) => {
+
+console .log ( 'yallah?' );
+
+const dialog = event .target;
 
 if ( event .key === 'Enter' ) {
 
 const scenarioEvent = {};
-const args = text .value
+const args = dialog .value
 .trim ()
 .split ( ' ' );
 scenarioEvent .scene = args [ 0 ];
@@ -32,18 +23,20 @@ scenarioEvent .character = args [ 1 ];
 scenarioEvent .action = args [ 2 ];
 
 scenarist .play ( scenarioEvent );
-text .value = '';
+dialog .value = '';
 
 }
 
 else if ( event .key === 'Escape' )
-text .blur ();
+dialog .blur ();
 
 };
 
+scenarist .write ( 'nav', 'input', text );
+
 document .onkeydown = document .onkeyup = ( event ) => {
 
-if ( ! focus ) {
+if ( document .activeElement .id !== 'text' ) {
 
 const scenarioEvent = {};
 
@@ -56,12 +49,10 @@ scenarist .play ( scenarioEvent );
 
 if ( event .type === 'keyup' && event .key === 'Control' ) {
 
-text .focus ();
+document .getElementById ( 'text' ) .focus ();
 
 }
 
 };
-
-document .body .appendChild ( text );
 
 };

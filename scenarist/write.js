@@ -2,33 +2,26 @@ export const descriptor = {};
 
 descriptor .enumerable = true;
 
-descriptor .value = function write ( element, content ) {
+descriptor .value = function write ( selector, tag, attributes, content ) {
 
-const { lines } = this;
-let tag;
-let type;
+if ( typeof selector !== 'string' || typeof tag !== 'string' )
+return this;
 
-switch ( element ) {
+const parent = document .querySelector ( selector );
 
-case 'title':
+if ( !parent )
+return this;
 
-tag = 'h1';
-type = 'title';
+const element = document .createElement ( tag );
 
-break;
-case 'heading':
+if ( typeof attributes === 'object' )
+Object .assign ( element, attributes );
 
-tag = 'h2';
-type = 'heading';
+if ( typeof content === 'string' )
+element .textContent = content;
 
-}
+parent .appendChild ( element );
 
-const line = document .createElement ( tag );
-line .class = type;
-line .textContent = content;
-
-lines .appendChild ( line );
-
-//window .location .hash = lines .length - 1;
+return this;
 
 };
