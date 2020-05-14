@@ -144,7 +144,12 @@ fill: #fff;
 
 svg#keyboard .key text {
 
+stroke: none;
+text-anchor: middle;
+dominant-baseline: middle;
+
 font-family: monospace;
+font-size: 50px;
 font-weight: normal;
 
 }
