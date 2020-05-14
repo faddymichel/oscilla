@@ -63,6 +63,8 @@ key .text = {};
 key .text .id = 'text-' + i;
 key .text .class = 'text';
 key .text [ 'text-anchor' ] = 'middle';
+key .text .x = x;
+key .text .y = y;
 
 keyboard .push ( key );
 
