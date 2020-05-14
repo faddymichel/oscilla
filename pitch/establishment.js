@@ -67,6 +67,9 @@ const key = {};
 
 key .id = 'key-' + keys [ i ];
 key .class = `key ${ semitones .includes ( keys [ i ] ) ? 'black' : 'white' }`;
+
+console .log ( key .class );
+
 key .points = position;
 key .onpointerdown
 = key .onpointerup
