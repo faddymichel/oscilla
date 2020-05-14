@@ -51,8 +51,8 @@ key .cap .onpointerdown
 
 scenarist .play ( {
 
-scene: button .value + ':' + ( event .type .endsWith ( 'down' ) ? 'on' : 'off' ),
-character: button .value
+scene: keys [ i ] + ':' + ( event .type .endsWith ( 'down' ) ? 'on' : 'off' ),
+character: keys [ i ]
 
 } );
 
@@ -65,6 +65,7 @@ key .text .class = 'text';
 key .text [ 'text-anchor' ] = 'middle';
 key .text .x = x;
 key .text .y = y;
+key .text .textLength = 30;
 
 keyboard .push ( key );
 
