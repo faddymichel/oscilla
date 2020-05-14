@@ -129,3 +129,21 @@ svg#keyboard .key.black {
 fill: #000;
 
 }
+
+svg#keyboard .key.white text {
+
+fill: #000;
+
+}
+
+svg#keyboard .key.black text {
+
+fill: #fff;
+
+}
+
+svg#keyboard .key text {
+
+font: bold 20 monospace;
+
+}

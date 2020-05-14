@@ -68,8 +68,6 @@ const key = {};
 key .id = 'key-' + keys [ i ];
 key .class = `key ${ semitones .includes ( keys [ i ] ) ? 'black' : 'white' }`;
 
-console .log ( key .class );
-
 key .points = position;
 key .onpointerdown
 = key .onpointerup
@@ -87,9 +85,15 @@ character: button .value
 };
 
 scenarist
-.write ( 'svg#keyboard', `${ namespace } foreignObject`, buttonObject )
-.write ( 'svg#keyboard', 'input', button )
-.write ( 'svg#keyboard', `${ namespace } polygon`, key );
+//.write ( 'svg#keyboard', `${ namespace } foreignObject`, buttonObject )
+//.write ( 'svg#keyboard', 'input', button )
+.write ( 'svg#keyboard', `${ namespace } polygon`, key )
+.write ( 'svg#keyboard', `${ namespace } text`, {
+
+x: x,
+y: y,
+'text-anchor': 'middle'
+} );
 
 } );
 
