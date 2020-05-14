@@ -12,10 +12,24 @@ const parent = document .querySelector ( selector );
 if ( !parent )
 return this;
 
-const element = document .createElement ( tag );
+tag = tag .split ( ' ' );
+let element;
+switch ( tag .length ) {
 
+case 1:
+element = document .createElement ( tag );
 if ( typeof attributes === 'object' )
 Object .assign ( element, attributes );
+
+break;
+case 2:
+element = document .createElementNS ( tag [ 0 ], tag [ 1 ] );
+
+if ( typeof attributes === 'object' )
+for ( const attribute in attributes )
+element .setAttribute ( attribute, attributes [ attribute ] );
+
+}
 
 if ( typeof content === 'string' )
 element .textContent = content;

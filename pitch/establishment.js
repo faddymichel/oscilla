@@ -10,7 +10,7 @@ class: 'scene'
 
 } )
 .write ( 'section#pitch', 'h2', {}, 'Pitch' )
-.write ( 'section#pitch', 'svg', { id: 'keyboard' } );
+.write ( 'section#pitch', `${ namespace } svg`, { id: 'keyboard' } );
 
 const radius = 50;
 const gap = .3 * radius;
@@ -71,9 +71,9 @@ character: button .value
 };
 
 scenarist
-.write ( 'svg#keyboard', 'foreignObject', buttonObject )
+.write ( 'svg#keyboard', `${ namespace } foreignObject`, buttonObject )
 .write ( 'svg#keyboard', 'input', button )
-.write ( 'svg#keyboard', 'polygon', key );
+.write ( 'svg#keyboard', `${ namespace } polygon`, key );
 
 y = i % 2 === 0 ? y : y - radius - gap;
 
