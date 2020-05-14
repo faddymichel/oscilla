@@ -17,19 +17,20 @@ let element;
 switch ( tag .length ) {
 
 case 1:
+
 element = document .createElement ( tag );
-if ( typeof attributes === 'object' )
-Object .assign ( element, attributes );
 
 break;
 case 2:
 element = document .createElementNS ( tag [ 0 ], tag [ 1 ] );
 
+}
+
 if ( typeof attributes === 'object' )
 for ( const attribute in attributes )
+attribute .startsWith ( 'on' ) ?
+element [ attribute ] = attributes [ attribute ] :
 element .setAttribute ( attribute, attributes [ attribute ] );
-
-}
 
 if ( typeof content === 'string' )
 element .textContent = content;

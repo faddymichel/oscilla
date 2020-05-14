@@ -80,6 +80,10 @@ y = i % 2 === 0 ? y : y - radius - gap;
 }
 
 document .querySelector ( 'svg#keyboard' )
-.viewBox = `0 0 ${ x + radius + gap } ${ y + 2 * radius + gap }`;
+scenarist .write ( 'svg#keyboard', null, {
+
+viewBox: `0 0 ${ x + radius + gap } ${ y + 2 * radius + gap }`
+
+} );
 
 };
