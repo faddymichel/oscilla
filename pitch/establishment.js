@@ -66,7 +66,7 @@ button .value = keys [ i ];
 const key = {};
 
 key .id = 'key-' + keys [ i ];
-key .className = `key ${ semitones .includes ( key [ i ] ) ? 'black' : 'white' }`;
+key .class = `key ${ semitones .includes ( key [ i ] ) ? 'black' : 'white' }`;
 key .points = position;
 key .onpointerdown
 = key .onpointerup
