@@ -90,6 +90,7 @@ scenarist
 .write ( 'svg#keyboard', `${ namespace } polygon`, key )
 .write ( 'svg#keyboard', `${ namespace } text`, {
 
+id: 'text-' + keys [ i ],
 x: x,
 y: y,
 'text-anchor': 'middle'
