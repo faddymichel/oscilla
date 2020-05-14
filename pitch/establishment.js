@@ -13,7 +13,7 @@ class: 'scene'
 
 const keys = "qawsedrf jikolp;[']";
 const semitones = "aeriop'";
-const positions = [];
+const keyboard = [];
 const radius = 50;
 const gap = .3 * radius;
 let x, y = x = radius + gap;
@@ -22,57 +22,31 @@ for ( let i = 0; i < keys .length; i++, x += 2 * radius + gap ) {
 
 if ( keys [ i ] === ' ' ) {
 
-positions .push ( null );
+keyboard .push ( null );
 continue;
 
 }
 
 y = i % 2 === 0 ? y : y + radius + gap;
 
-positions .push ( [
+const key = {};
+
+key .cap = {};
+
+key .cap .points = [
 
 `${ x + radius },${ y }`,
 `${ x },${ y + radius }`,
 `${ x - radius },${ y }`,
 `${ x },${ y - radius }`
 
-] .join ( ' ' ) );
+] .join ( ' ' );
 
-y = i % 2 === 0 ? y : y - radius - gap;
-}
+key .cap .id = 'cap-' + i;
+key .cap .class = 'cap';
 
-scenarist .write ( 'section#pitch', `${ namespace } svg`, {
-
-id: 'keyboard',
-viewBox: `0 0 ${ x + radius + gap } ${ y + 2 * radius + 2 * gap }`
-
-} );
-
-positions .forEach ( ( position, i ) => {
-
-if ( ! position )
-return;
-
-const buttonObject = {};
-buttonObject .width = 0 * radius;
-buttonObject .height = 0 * radius;
-buttonObject .x = x;
-buttonObject .y = y;
-
-const button = {};
-button .type = 'button';
-button .value = keys [ i ];
-
-const key = {};
-
-key .id = 'key-' + keys [ i ];
-key .class = `key ${ semitones .includes ( keys [ i ] ) ? 'black' : 'white' }`;
-
-key .points = position;
-key .onpointerdown
-= key .onpointerup
-= button .onpointerdown
-= button .pointerup
+key .cap .onpointerdown
+= key .cap .onpointerup
 = ( event ) => {
 
 scenarist .play ( {
@@ -84,18 +58,39 @@ character: button .value
 
 };
 
+key .text = {};
+
+key .text .id = 'text-' + i;
+key .text .class = 'text';
+key .text [ 'text-anchor' ] = 'middle';
+
+keyboard .push ( key );
+
+y = i % 2 === 0 ? y : y - radius - gap;
+
+}
+
+scenarist .write ( 'section#pitch', `${ namespace } svg`, {
+
+id: 'keyboard',
+viewBox: `0 0 ${ x + radius + gap } ${ y + 2 * radius + 2 * gap }`
+
+} );
+
+keyboard .forEach ( ( key, i ) => {
+
+if ( ! key )
+return;
+
 scenarist
-//.write ( 'svg#keyboard', `${ namespace } foreignObject`, buttonObject )
-//.write ( 'svg#keyboard', 'input', button )
-.write ( 'svg#keyboard', `${ namespace } polygon`, key )
-.write ( 'svg#keyboard', `${ namespace } text`, {
+.write ( 'svg#keyboard', `${ namespace } g`, {
 
-id: 'text-' + keys [ i ],
-x: x,
-y: y,
-'text-anchor': 'middle'
+id: 'key-' + i,
+class: `key ${ semitones .includes ( keys [ i ] ) ? 'black' : 'white' }`
 
-}, keys [ i ] );
+} )
+.write ( `#key-${ i }`, `${ namespace } polygon`, key .cap )
+.write ( `#key-${ i }`, `${ namespace } text`, key .text, keys [ i ] );
 
 } );
 
