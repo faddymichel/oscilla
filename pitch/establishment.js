@@ -10,28 +10,47 @@ class: 'scene'
 
 } )
 .write ( 'section#pitch', 'h2', {}, 'Pitch' )
-.write ( 'section#pitch', `${ namespace } svg`, { id: 'keyboard' } );
 
+const keys = "qawsedrf jikolp;[']";
+const positions = [];
 const radius = 50;
 const gap = .3 * radius;
 let x, y = x = radius + gap;
 
-for (
+for ( let i = 0; i < keys .length; i++, x += 2 * radius + gap ) {
 
-let keys = "qawsedrf jikolp;[']",
-i = 0;
+if ( keys [ i ] === ' ' ) {
 
-i < keys .length;
-
-i++,
-x += 2 * radius + gap
-
-) {
-
-if ( keys [ i ] === ' ' )
+positions .push ( null );
 continue;
 
+}
+
 y = i % 2 === 0 ? y : y + radius + gap;
+
+positions .push ( [
+
+`${ x + radius },${ y }`,
+`${ x },${ y + radius }`,
+`${ x - radius },${ y }`,
+`${ x },${ y - radius }`
+
+] .join ( ' ' ) );
+
+y = i % 2 === 0 ? y : y - radius - gap;
+}
+
+scenarist .write ( 'section#pitch', `${ namespace } svg`, {
+
+id: 'keyboard',
+viewBox: `0 0 ${ x + radius + gap } ${ y + 2 * radius + gap }`
+
+} );
+
+positions .forEach ( ( position, i ) => {
+
+if ( ! position )
+return;
 
 const buttonObject = {};
 buttonObject .width = 0 * radius;
@@ -47,14 +66,7 @@ const key = {};
 
 key .id = 'key-' + keys [ i ];
 key .class = 'key';
-key .points = [
-
-`${ x + radius },${ y }`,
-`${ x },${ y + radius }`,
-`${ x - radius },${ y }`,
-`${ x },${ y - radius }`
-
-] .join ( ' ' );
+key .points = position;
 key .onpointerdown
 = key .onpointerup
 = button .onpointerdown
@@ -74,15 +86,6 @@ scenarist
 .write ( 'svg#keyboard', `${ namespace } foreignObject`, buttonObject )
 .write ( 'svg#keyboard', 'input', button )
 .write ( 'svg#keyboard', `${ namespace } polygon`, key );
-
-y = i % 2 === 0 ? y : y - radius - gap;
-
-}
-
-document .querySelector ( 'svg#keyboard' )
-scenarist .write ( 'svg#keyboard', null, {
-
-viewBox: `0 0 ${ x + radius + gap } ${ y + 2 * radius + gap }`
 
 } );
 
