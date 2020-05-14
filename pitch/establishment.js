@@ -93,7 +93,8 @@ scenarist
 x: x,
 y: y,
 'text-anchor': 'middle'
-} );
+
+}, keys [ i ] );
 
 } );
 
