@@ -12,6 +12,7 @@ class: 'scene'
 .write ( 'section#pitch', 'h2', {}, 'Pitch' )
 
 const keys = "qawsedrf jikolp;[']";
+const semitones = "aeriop'";
 const positions = [];
 const radius = 50;
 const gap = .3 * radius;
@@ -43,7 +44,7 @@ y = i % 2 === 0 ? y : y - radius - gap;
 scenarist .write ( 'section#pitch', `${ namespace } svg`, {
 
 id: 'keyboard',
-viewBox: `0 0 ${ x + radius + gap } ${ y + 2 * radius + gap }`
+viewBox: `0 0 ${ x + radius + gap } ${ y + 2 * radius + 2 * gap }`
 
 } );
 
@@ -65,7 +66,7 @@ button .value = keys [ i ];
 const key = {};
 
 key .id = 'key-' + keys [ i ];
-key .class = 'key';
+key .className = `key ${ semitones .includes ( key [ i ] ) ? 'black' : 'white' }`;
 key .points = position;
 key .onpointerdown
 = key .onpointerup

@@ -8,8 +8,6 @@ text .placeholder = 'Write a Script to Play';
 
 text .onkeyup = ( event ) => {
 
-console .log ( 'yallah?' );
-
 const dialog = event .target;
 
 if ( event .key === 'Enter' ) {
