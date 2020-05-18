@@ -35,14 +35,12 @@ paths: [
 '/oscilla/octave.js',
 '/oscilla/wave.js',
 '/oscilla/loudness.js',
-//'/oscilla/adsr.js'
+'/oscilla/adsr.js'
 
 ],
 establish: true
 
-}
-
-);
+} );
 
 scenarist .display = 'carrier';
 

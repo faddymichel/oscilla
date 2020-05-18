@@ -13,29 +13,29 @@ for ( const partial of oscilla .partials ) {
 
 partial [ note ] .amplifier .offset
 .cancelScheduledValues (
-oscilla .currentTime + oscilla .releaseTime
+oscilla .currentTime + partial .attributes .release .value
 );
 
 partial [ note ] .amplifier .offset
 .linearRampToValueAtTime (
-partial .attributes .loudness .value * oscilla .sustain,
+partial .attributes .loudness .value * partial .attributes .sustain .value,
 oscilla .currentTime
 );
 
 partial [ note ] .amplifier .offset
 .linearRampToValueAtTime (
 0,
-oscilla .currentTime + oscilla .releaseTime
+oscilla .currentTime + partial .attributes .release .value
 );
 
 partial [ note ] .pitch
 .stop (
-oscilla .currentTime + oscilla .releaseTime
+oscilla .currentTime + partial .attributes .release .value
 );
 
 partial [ note ] .modulator
 .stop (
-oscilla .currentTime + oscilla .releaseTime
+oscilla .currentTime + partial .attributes .release .value
 );
 
 }

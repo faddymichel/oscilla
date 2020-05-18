@@ -8,6 +8,7 @@ import { descriptor as modulation } from './modulation.js';
 import { descriptor as loudness } from './loudness.js';
 import { descriptor as wave } from './wave.js';
 import { descriptor as detune } from './detune.js';
+import { descriptor as set } from './set.js';
 
 const Context = window .AudioContext || window .WebkitAudioContext;
 
@@ -19,10 +20,6 @@ super ();
 
 const oscilla = this;
 
-oscilla .attackTime = 0;
-oscilla .decayTime = 0;
-oscilla .sustain = .15;
-oscilla .releaseTime = 0;
 oscilla .multiphonic = false;
 
 oscilla .key = {};
@@ -42,6 +39,14 @@ oscilla .key [ note ]
 
 }
 
+oscilla .onwave = ( event ) => {
+
+const { partial, note } = event .detail;
+
+partial [ note ] .pitch .type = partial .attributes .wave;
+
+};
+
 }
 
 };
@@ -56,3 +61,26 @@ Object .defineProperty ( Oscilla .prototype, 'detune', detune );
 Object .defineProperty ( Oscilla .prototype, 'wave', wave );
 Object .defineProperty ( Oscilla .prototype, 'attack', attack );
 Object .defineProperty ( Oscilla .prototype, 'release', release );
+Object .defineProperty ( Oscilla .prototype, 'set', set );
+
+for ( const event of [
+
+'wave',
+'detune'
+
+] ) {
+
+Object .defineProperty ( Oscilla .prototype, 'on' + event, {
+
+enumerable: true,
+set: function set ( listener ) {
+
+const oscilla = this;
+
+oscilla .addEventListener ( event, listener, false );
+
+}
+
+} );
+
+}

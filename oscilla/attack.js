@@ -16,13 +16,13 @@ for ( const partial of oscilla .partials ) {
 partial [ note ] .amplifier .offset
 .linearRampToValueAtTime (
 partial .attributes .loudness .value,
-oscilla .currentTime + oscilla .attackTime
+oscilla .currentTime + partial .attributes .attack .value
 );
 
 partial [ note ] .amplifier .offset
 .linearRampToValueAtTime (
-partial .attributes .loudness .value * oscilla .sustain,
-oscilla .currentTime + oscilla .attackTime + oscilla .decayTime
+partial .attributes .loudness .value * partial .attributes .sustain .value,
+oscilla .currentTime + partial .attributes .attack .value + partial .attributes .decay .value
 );
 
 }

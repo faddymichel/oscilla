@@ -15,8 +15,8 @@ let detune = partial .attributes .detune + octave;
 partial .attributes .detune = detune > 5 ? 5 :
 detune < -5 ? -5 : detune;
 
-oscilla .dispatchEvent (
-new CustomEvent ( 'octave', {
+partial .dispatchEvent (
+new CustomEvent ( 'detune', {
 
 detail: partial
 

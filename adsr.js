@@ -1,41 +1,44 @@
-export const character = {};
+const increment = 'zxcv';
 
-character .cast = 'zxcvbn';
-character .action = function action ( event ) {
+export const characters = {};
 
-const setting = this;
+characters .events = [ 'adsr', 'envelope' ];
+characters .cast = increment + increment .toUpperCase ();
+characters .action = function action ( event ) {
+
 const { oscilla } = this;
+let name;
 
-if ( event .type === 'keyup' ) {
-switch ( event .key ) {
+switch ( event .character ) {
 
-case 'z': setting .adsr = 'attackTime';
+case 'z':
+case 'Z':
 
-break;
-case 'x': setting .adsr = 'decayTime';
-
-break;
-case 'c': setting .adsr = 'sustain';
+name = 'attack';
 
 break;
-case 'v': setting .adsr = 'releaseTime';
+case 'x':
+case 'X':
+
+name = 'decay';
 
 break;
-default:
+case 'c':
+case 'C':
 
-if ( isNaN ( oscilla [ setting .adsr ] ) )
-return;
+name = 'sustain';
 
-const value = event .key === 'b' ? -5 : 5;
+break;
+case 'v':
+case 'V':
 
-oscilla [ setting .adsr ] = (
-parseInt (
-oscilla [ setting .adsr ] * 100
-) + value
-) / 100;
+name = 'release';
 
 }
 
-}
+const attribute = {};
+attribute [ name ] = increment .includes ( event .character ) ? 1 : -1;
+
+oscilla .set ( attribute );
 
 };

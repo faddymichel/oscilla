@@ -16,7 +16,7 @@ for ( const partial of oscilla .partials ) {
 
 partial .attributes .wave = domain [ value ] ? domain [ value ] : domain [ '1' ];
 
-oscilla .dispatchEvent (
+partial .dispatchEvent (
 new CustomEvent ( 'wave', {
 
 detail: partial

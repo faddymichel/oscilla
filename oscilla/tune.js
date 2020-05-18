@@ -32,16 +32,16 @@ cents = -partial [ note ] .pitch .detune .value;
 
 partial [ note ] .pitch .detune .value = cents;
 
-oscilla .addEventListener ( 'octave', ( event ) => {
+partial .ondetune = ( event ) => {
 
 if ( event .detail === partial )
 partial [ note ] .pitch .detune
-.setValueAtTime (
+.linearRampToValueAtTime (
 parseInt ( partial .attributes .detune * 100 * oscilla .steps ),
-oscilla .currentTime
+oscilla .currentTime + partial .attributes .attack .value
 );
 
-}, false );
+};
 
 oscilla .addEventListener ( 'modulation', ( event ) => {
 
@@ -54,12 +54,12 @@ oscilla .currentTime
 
 }, false );
 
-oscilla .addEventListener ( 'wave', ( event ) => {
+partial .onwave = ( event ) => {
 
 if ( event .detail === partial )
-partial .pitch .type = partial .attributes .wave;
+partial [ note ] .pitch .type = partial .attributes .wave;
 
-}, false );
+};
 
 partial [ note ] .modulator .frequency .value = partial .attributes .modulation;
 
