@@ -10,13 +10,13 @@ for ( const partial of oscilla .partials ) {
 
 partial [ note ] = {};
 
-partial [ note ] .pitch = oscilla .createOscillator ();
-partial [ note ] .pitchAmplifier = oscilla .createGain ();
+partial [ note ] .pitch = partial [ note ] .pitch || oscilla .createOscillator ();
+partial [ note ] .pitchAmplifier = partial [ note ] .pitchAmplifier || oscilla .createGain ();
 
-partial [ note ] .modulator = oscilla .createOscillator ();
-partial [ note ] .modulatorAmplifier = oscilla .createGain ();
+partial [ note ] .modulator = partial [ note ] .modulator || oscilla .createOscillator ();
+partial [ note ] .modulatorAmplifier = partial [ note ] .modulatorAmplifier || oscilla .createGain ();
 
-partial [ note ] .amplifier = oscilla .createConstantSource ();
+partial [ note ] .amplifier = partial [ note ] .amplifier || oscilla .createConstantSource ();
 
 partial [ note ] .pitchAmplifier .gain .value
 = partial [ note ] .modulatorAmplifier .gain .value
@@ -25,7 +25,7 @@ partial [ note ] .pitchAmplifier .gain .value
 partial [ note ] .pitch .type = partial .attributes .wave;
 partial [ note ] .pitch .frequency .value = oscilla .key [ note ] .frequency;
 
-let cents = parseInt ( partial .attributes .detune * 100 * oscilla .steps );
+let cents = parseInt ( partial .attributes .detune .value * 100 * oscilla .steps );
 
 if ( cents === 0 )
 cents = -partial [ note ] .pitch .detune .value;
@@ -37,7 +37,7 @@ partial .ondetune = ( event ) => {
 if ( event .detail === partial )
 partial [ note ] .pitch .detune
 .linearRampToValueAtTime (
-parseInt ( partial .attributes .detune * 100 * oscilla .steps ),
+parseInt ( partial .attributes .detune .value * 100 * oscilla .steps ),
 oscilla .currentTime + partial .attributes .attack .value
 );
 

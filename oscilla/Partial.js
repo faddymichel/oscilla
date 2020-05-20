@@ -11,6 +11,16 @@ const defaults = partial .attributes = {};
 defaults .wave = attributes .wave || 'sawtooth';
 defaults .detune = attributes .detune || 0;
 
+defaults .detune = {
+
+min: -5,
+max: 5,
+coefficient: 1,
+offset: 0,
+value: 0
+
+};
+
 [ 'loudness', 'sustain' ] .forEach ( ( name ) => {
 
 defaults [ name ] = {};

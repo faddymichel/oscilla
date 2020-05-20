@@ -23,6 +23,14 @@ attribute .offset = attribute .offset < attribute .min ? attribute .min :
 attribute .offset > attribute .max ? attribute .max : attribute .offset;
 attribute .value = attribute .coefficient * attribute .offset;
 
+partial .dispatchEvent (
+new CustomEvent ( name, {
+
+detail: partial
+
+} )
+);
+
 }
 
 }
