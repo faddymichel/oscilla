@@ -4,16 +4,26 @@ export const establishment = function establishment () {
 
 const setting = this;
 
-setting .oscilla = new Oscilla ( {
+setting .oscilla = new Oscilla ();
+
+setting .oscilla .tuning ( {
+
+reference: {
 
 frequency: 440,
-pitch: setting .keys .indexOf ( setting .pitch ) + 1,
+note: setting .keys .indexOf ( setting .pitch ) + 1,
+
+},
 steps: setting .steps,
 keys: setting .keys .length
 
 } );
 
-setting .oscilla .partial ( {} );
+setting .oscilla .partial ( {
+
+detune: 0
+
+} );
 
 };
 

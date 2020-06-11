@@ -6,7 +6,7 @@ descriptor .value = function tune ( note ) {
 
 const oscilla = this;
 
-for ( const partial of oscilla .partials ) {
+for ( const partial of oscilla .timbre ) {
 
 partial [ note ] = {};
 
@@ -31,7 +31,9 @@ partial [ note ] .pitch .frequency .value
 = partial [ note ] .fm .frequency .value
 = oscilla .key [ note ] .frequency;
 
-let cents = parseInt ( partial .attributes .detune .value * 100 * oscilla .steps );
+console .log ( oscilla .key .toString () );
+
+let cents = parseInt ( partial .attributes .detune .value * 100 * oscilla .key .steps );
 
 if ( cents === 0 )
 cents = -partial [ note ] .pitch .detune .value;
@@ -45,7 +47,7 @@ partial .ondetune = ( event ) => {
 if ( event .detail === partial )
 partial [ note ] .pitch .detune
 .linearRampToValueAtTime (
-parseInt ( partial .attributes .detune .value * 100 * oscilla .steps ),
+parseInt ( partial .attributes .detune .value * 100 * oscilla .key .steps ),
 oscilla .currentTime + partial .attributes .attack .value
 );
 

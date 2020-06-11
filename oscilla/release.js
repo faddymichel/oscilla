@@ -11,7 +11,7 @@ const oscilla = this;
 if ( !oscilla .key [ note ] )
 return;
 
-for ( const partial of oscilla .partials ) {
+for ( const partial of oscilla .timbre ) {
 
 for ( const instrument of instruments ) {
 

@@ -2,7 +2,7 @@ export const descriptor = {};
 
 descriptor .enumerable = true;
 
-const partials = function* partials ( oscilla ) {
+const timbre = function* timbre ( oscilla ) {
 
 const pointer = oscilla .pointer;
 
@@ -11,8 +11,6 @@ yield oscilla [ pointer ];
 
 else
 do {
-
-console .log ( 'yallah' );
 
 const partial = oscilla [ oscilla .pointer ];
 oscilla .pointer = partial .next;
@@ -29,6 +27,6 @@ descriptor .get = function get () {
 
 const oscilla = this;
 
-return partials ( oscilla );
+return timbre ( oscilla );
 
 };

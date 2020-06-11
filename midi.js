@@ -1,13 +1,9 @@
 export const establishment = function establishment () {
 
+const { scenarist } = this;
+
 navigator .requestMIDIAccess ()
 .then ( ( midi ) => {
-
-Object .defineProperty ( scenarist, 'midi', {
-
-value: midi
-
-} );
 
 for ( const input of midi .inputs .values () ) {
 

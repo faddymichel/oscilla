@@ -13,7 +13,7 @@ return;
 
 oscilla .tune ( note );
 
-for ( const partial of oscilla .partials ) {
+for ( const partial of oscilla .timbre ) {
 
 for ( const instrument of instruments ) {
 
