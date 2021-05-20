@@ -1,9 +1,6 @@
-const tune = {};
-export default tune;
+import { on, off } from './note.js';
 
-tune .scenaristable = true;
-tune .enumerable = true;
-tune .value = ( $, event, scale, standard ) => {
+export default ( oscilla, actor, scale, standard ) => {
 
 scale = scale .split ( '' );
 standard = scale .indexOf ( standard );
@@ -11,10 +8,23 @@ standard = scale .indexOf ( standard );
 if ( standard < 0 )
 return;
 
-$ ( 'tuning', {} );
-$ ( 'tuning', 'scale', scale );
-$ ( 'tuning', 'detune', {} );
+oscilla ( 'scale', scale );
 
-scale .map ( ( pitch, step ) => $ ( 'tuning', 'detune', step, 100 * ( step - standard ), pitch ) );
+oscilla ( 'on', {}, 'keydown', 'mousedown', 'pointerdown' );
+oscilla ( 'on', 'key', on, ... oscilla ( 'scale' ) );
+
+oscilla ( 'off', {}, 'keyup', 'mouseup', 'pointerup' );
+oscilla ( 'off', 'key', off, ... oscilla ( 'scale' ) );
+
+document .onkeydown = document .onkeyup = ( { key, type } ) => oscilla ( type, key );
+
+oscilla ( 'scale', 'map', ( key, step ) => {
+
+const note = `note:oscilla{ key }`;
+
+oscilla ( note, {} );
+oscilla ( note, 'detune', step, 100 * ( step - standard )
+
+}, key );
 
 };

@@ -1,37 +1,30 @@
-const note = {};
-export default note;
+export default {
 
-const on = note .on = {};
-export const off = note .off = {};
+on: ( note, key ) => {
 
-on .scenaristable = off .scenaristable = true;
-on .enumerable = off .enumerable = true;
+const oscilla = note .Owner;
 
-on .value = ( $, key ) => {
-
-$ = $ .Scenario;
-
-if ( $ ( 'note', key ) !== undefined )
+if ( oscilla ( 'note', key, 'playing' ) === true )
 return;
 
-$ ( 'note', key, $ ( 'engine', 'createOscillator' ) );
-$ ( 'note', key, 'detune', 'setValueAtTime', $ ( 'tuning', 'detune', key ), $ ( 'engine', 'currentTime' ) );
-$ ( 'note', key, 'connect', $ ( 'loudness', key ) );
-$ ( 'note', key, 'start' );
+oscilla ( 'script', oscilla ( 'design', 'on' ), '..', 'note', key );
 
-};
+oscilla ( 'note', key, 'playing', true );
 
-off .value = ( $, key ) => {
+},
 
-$ = $ .Scenario;
+off: ( note, key ) => {
 
-$ ( 'note', key, 'stop' );
-$ ( 'note', {
+const oscilla = note .Owner;
+
+oscilla ( 'note', {
 
 configurable: true,
 writable: true,
 value: undefined
 
 }, key );
+
+}
 
 };

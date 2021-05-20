@@ -1,0 +1,7 @@
+note ( engine createOscillator )
+
+note detune setValueAtTime ( tuning detune ) ( engine currentTime )
+
+note connect ( loudness )
+
+note start

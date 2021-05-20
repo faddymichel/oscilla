@@ -1,0 +1,4 @@
+out ( engine createGain )
+out gain setValueAtTime ( #int .1 ) ( engine currentTime )
+
+out connect ( engine destination )

@@ -1,42 +1,22 @@
-import Scenarist from '/scenarist/module/scenarist.mjs';
-import tune from './tune.js';
-import note from './note.js';
+import Typist from '/typist/typist.js';
 
-const Context = window .AudioContext || window .WebkitAudioContext;
+import tune from './tune.js';
+import produce from './produce.js';
+
+import Sound from './sound.js'
+
+const Oscilla = Typist .produce ();
+
+Oscilla ( 'page', document, 'document', 'dom' );
+
+Oscilla ( 'tune', tune );
+
+Oscilla ( 'produce', produce );
 
 window .onload = () => {
 
-const $ = Scenarist ( {} );
+const oscilla = Oscilla .produce ();
 
-$ ( 'page', document );
-$ ( tune, 'tune' );
-$ ( 'noteOn', $ .branch (), 'on', 'keydown' );
-$ ( 'noteOff', $ .branch (), 'off', 'keyup' );
-
-$ ( 'tune', `qasedrfjikolp;']`, 'l' );
-
-$ ( 'noteOn', note .on, ... $ ( 'tuning', 'scale' ) );
-$ ( 'noteOff', note .off, ... $ ( 'tuning', 'scale' ) );
-
-$ ( 'noteOff', '=', $ => {
-
-$ = $ .Scenario;
-
-$ ( 'engine', new Context () );
-$ ( 'note', {} );
-$ ( 'loudness', {} );
-
-$ ( 'tuning', 'scale', 'forEach', key => {
-
-$ ( 'loudness', key, $ ( 'engine', 'createGain' ) );
-$ ( 'loudness', key, 'gain', 'setValueAtTime', .1, $ ( 'engine', 'currentTime' ) );
-
-$ ( 'loudness', key, 'connect', $ ( 'engine', 'destination' ) );
-
-} );
-
-} );
-
-document .onkeydown = document .onkeyup = ( { key, type } ) => $ ( type, key );
+oscilla ( 'tune', `qasedrfjikolp;']`, 'l' );
 
 };
