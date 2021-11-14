@@ -1,6 +1,10 @@
 export default function on () {
 
 const note = this;
+
+if ( note .output )
+return;
+
 const { context, program } = note;
 const { dac, type, delay } = program;
 
