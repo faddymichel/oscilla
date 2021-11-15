@@ -5,8 +5,8 @@ const { play, setting, direction } = scene;
 if ( ! direction instanceof KeyboardEvent )
 return;
 
-const conflict = direction .type === 'keydown' ? setting .on : setting .off;
-const { context } = play;
+const { action, context } = play;
+const conflict = direction .type === 'keydown' ? action .on : action .off;
 const program = scene .program = scene .program ? scene .program .target : play .program;
 
 if ( ! program )

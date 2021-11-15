@@ -6,7 +6,7 @@ if ( ! note )
 return;
 
 delete scene .resolution;
-scene .conflict = play .setting;
+scene .conflict = {};
 
 const target = note .target = oscilla .call ( scene, scene .direction, ... act );
 
