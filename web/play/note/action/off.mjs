@@ -1,4 +1,4 @@
-export default function off () {
+export default async function off () {
 
 const note = this;
 const { context, program: { delay } } = note;

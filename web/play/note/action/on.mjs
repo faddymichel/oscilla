@@ -1,4 +1,4 @@
-export default function on () {
+export default async function on () {
 
 const note = this;
 
