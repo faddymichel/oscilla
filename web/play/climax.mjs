@@ -1,29 +1,12 @@
-export default function climax ( scene, key = 69, velocity = 64, delay = 0 ) {
+export default function climax ( scene ) {
 
-const { play, setting, direction } = scene;
-
-if ( ! direction instanceof KeyboardEvent )
+if ( ! ( scene .direction instanceof KeyboardEvent ) )
 return;
 
-const { action, context } = play;
-const conflict = direction .type === 'keydown' ? action .on : action .off;
-const program = scene .program = scene .program ? scene .program .target : play .program;
+const play = this;
+const conflict = play .note;
 
-if ( ! program )
-return;
-
-//const note = scene .note = scene .note ? scene .note .target : play .note || ( play .note = { context, program } );
-
-if ( ! play .note )
-scene .note = play .note = { context, program };
-
-else if ( ! scene .note )
-scene .note = play .note;
-
-else
-scene .note = scene .note .target || { context, program };
-
-scene .setting = scene .note;
+scene .direction = scene .direction .type === 'keydown' ? 'on' : 'off';
 
 return conflict;
 

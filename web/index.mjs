@@ -1,4 +1,3 @@
-import observer from './observer.mjs';
 import play from './play/index.mjs';
 
 window .onload = () => {
