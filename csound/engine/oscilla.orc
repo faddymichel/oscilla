@@ -1,12 +1,10 @@
 #include "performance.orc"
 
-#define starter #13#
-
 #define program #p4#
 #define channel #p5#
 #define key #p6#
 #define velocity #p7#
-#define output #p8#
+#define outputChannel #p8#
 #define instance #p9#
 
 #define module #p10#
@@ -18,7 +16,7 @@ iProgram = $program
 iChannel = $channel
 iKey = $key
 iVelocity = $velocity
-iOutput = $output
+iOutputChannel = $outputChannel
 iInstance = $instance
 
 #
@@ -27,7 +25,7 @@ iChannel = 1
 
 while iChannel <= 16 do
 
-massign iChannel, $starter
+massign iChannel, "oscilla"
 
 iChannel = iChannel + 1
 
@@ -40,10 +38,7 @@ od
 giNextFT vco2init 31, 100
 giInstance = 0
 
-instr $starter, mStarter
-
-giInstance = giInstance + 1
-$instance = giInstance
+instr oscilla
 
 midiprogramchange $program
 
@@ -57,14 +52,15 @@ endif
 
 midinoteonkey $key, $velocity
 
-iOutput = 0
+iOutputChannel = 0
 aOutput init 0
+giInstance = giInstance + 1
 
-while iOutput < nchnls do
+while iOutputChannel < nchnls do
 
-oPlug aOutput, iOutput
+oPlug aOutput, iOutputChannel, giInstance
 
-iOutput = iOutput + 1
+iOutputChannel = iOutputChannel + 1
 
 od
 

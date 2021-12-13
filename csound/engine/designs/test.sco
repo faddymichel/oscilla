@@ -1,4 +1,4 @@
-i "link" 0 0 0 "mStarter" "mOscillator"
+i "link" 0 0 0 "oscilla" "mOscillator"
 i "link" 0 0 0 "mOscillator" "mOut"
 
 /*
@@ -13,5 +13,5 @@ i "parameter_i" 0 0 0 "cADSR" "release" .1
 
 s
 
-i "mStarter" 0 1 0 1 69 63
-i "mStarter" 0.5 1 0 1 57 63
+i "oscilla" 0 1 0 1 69 63
+i "oscilla" 0.5 1 0 1 57 63

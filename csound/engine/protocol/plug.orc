@@ -1,49 +1,76 @@
 giDestinationInputDescriptor = $descriptor
 
-opcode oPlug, 0, aj
+opcode oPlug, 0, ajj
 
-aSourceOutput, iOutputChannel xin
+aSourceOutput, iOutputChannel, iInstance xin
 
 if iOutputChannel == -1 then
 
-iOutputChannel = $output
+iOutputChannel = $outputChannel
 
 endif
 
+if iInstance == -1 then
+
+iInstance = $instance
+
+endif
+
+iChannel = $channel
 iSourceModule = int ( p1 )
-iInstance = frac ( p1 )
+iTag = frac ( p1 )
 
-if iInstance == 0 then
+if iTag == 0 then
 
-iInstance = ( iOutputChannel + 1 ) / ( nchnls + 1 )
+iTag = iChannel / 1000 + iOutputChannel / 1000000
 
 endif
 
 SLinkLocator sprintf "%d/%d/%d", giLinkDescriptor, $program, iSourceModule
 
 iDestinationModule chnget SLinkLocator
-iDestinationModule = iDestinationModule + iInstance
 
-SDestinationInputLocator sprintf "%d/%d/%f", giDestinationInputDescriptor, $instance, iDestinationModule
+SDestinationInputLocator sprintf "%d/%d/%f/%d", giDestinationInputDescriptor, iInstance, iDestinationModule, iOutputChannel
 
 chnset aSourceOutput, SDestinationInputLocator
 
-print iOutputChannel
+iDestinationModule = iDestinationModule + iTag
 
-schedule iDestinationModule, 0, p3, $program, $channel, $key, $velocity, iOutputChannel, $instance
+schedule iDestinationModule, 0, - abs ( p3 ), $program, $channel, $key, $velocity, iOutputChannel, iInstance
 
 endop
 
 
-opcode oInput, a, 0
+opcode oInput, a, j
 
-iDestinationModule = p1
+iInput xin
+p3 = abs ( p3 )
 
-SDestinationInputLocator sprintf "%d/%d/%f", giDestinationInputDescriptor, $instance, iDestinationModule
+cggoto iInput > -1, inputFromChannel
+
+iDestinationModule = int ( p1 )
+iOutputChannel = $outputChannel
+
+goto readInput
+
+inputFromChannel:
+
+SLinkLocator sprintf "%d/%d/%d", giLinkDescriptor, $program, int ( p1 )
+
+iDestinationModule chnget SLinkLocator
+iOutputChannel = iInput
+
+readInput:
+
+SDestinationInputLocator sprintf "%d/%d/%f/%d", giDestinationInputDescriptor, $instance, iDestinationModule, iOutputChannel
 
 aSourceOutput chnget SDestinationInputLocator
 
+cggoto iInput > -1, output
+
 chnclear SDestinationInputLocator
+
+output:
 
 xout aSourceOutput
 

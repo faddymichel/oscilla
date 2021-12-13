@@ -11,7 +11,7 @@ SControllerLocator sprintf "%f/%f/%f/%s", giControllerDescriptor, $program, iMod
 iController chnget SControllerLocator
 iController = iController + frac ( p1 )
 
-schedule iController, p2, p3, $program, $channel, $key, $velocity, $output, p1, SPort
+schedule iController, p2, p3, $program, $channel, $key, $velocity, $outputChannel, p1, SPort
 
 SControllerPortLocator sprintf "%f/%f/%s", giControllerPortDescriptor, p1, SPort
 

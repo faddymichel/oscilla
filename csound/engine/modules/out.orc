@@ -2,11 +2,9 @@ instr mOut
 
 $note
 
-kChannel = $output + 1
+kChannel = iOutputChannel + 1
 aOutput oInput
 
 outch kChannel, aOutput
-
-print iInstance
 
 endin
