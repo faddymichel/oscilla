@@ -6,7 +6,7 @@ iProgram, SModule, SPort, SController xin
 iModule nstrnum SModule
 iController nstrnum SController
 
-SControllerLocator sprintf "%f/%f/%f/%s", giControllerDescriptor, iProgram, iModule, SPort
+SControllerLocator sprintf "%d/%d/%d/%s", giControllerDescriptor, iProgram, iModule, SPort
 
 chnset iController, SControllerLocator
 

@@ -21,6 +21,13 @@ iInstance = $instance
 
 #
 
+#define controllerNote #$note
+
+iModule = $module
+SPort strget $port
+
+#
+
 iChannel = 1
 
 while iChannel <= 16 do
@@ -97,11 +104,11 @@ endin
 instr parameter_$rate
 
 iProgram = p4
-SController strget p5
+SPort strget p5
 SParameter strget p6
 $rate.Value = p7
 
-oAssignment_$rate iProgram, SController, SParameter, $rate.Value
+oAssignment_$rate iProgram, SPort, SParameter, $rate.Value
 
 endin
 

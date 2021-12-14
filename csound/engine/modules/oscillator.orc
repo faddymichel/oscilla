@@ -6,8 +6,9 @@ cggoto iOutputChannel > 0, input
 
 aInput oInput
 
+aEnvelope oController_a "envelope"
 iFrequency = cpsmidinn ( iKey )
-aWave poscil .3, iFrequency
+aWave poscil aEnvelope, iFrequency
 
 aOutput = aWave + aInput
 

@@ -1,4 +1,4 @@
-giControllerPortDescriptor = $descriptor
+giModulePortDescriptor = $descriptor
 
 #define controllerOpcode(rate) #
 
@@ -7,15 +7,15 @@ opcode oController_$rate, $rate, S
 SPort xin
 
 iModule = int ( p1 )
-SControllerLocator sprintf "%f/%f/%f/%s", giControllerDescriptor, $program, iModule, SPort
+SControllerLocator sprintf "%d/%d/%d/%s", giControllerDescriptor, $program, iModule, SPort
 iController chnget SControllerLocator
 iController = iController + frac ( p1 )
 
-schedule iController, p2, p3, $program, $channel, $key, $velocity, $outputChannel, p1, SPort
+schedule iController, p2, p3, $program, $channel, $key, $velocity, $outputChannel, $instance, p1, SPort
 
-SControllerPortLocator sprintf "%f/%f/%s", giControllerPortDescriptor, p1, SPort
+SModulePortLocator sprintf "%d/%d/%f/%s", giModulePortDescriptor, $instance, p1, SPort
 
-$rate.Value chnget SControllerPortLocator
+$rate.Value chnget SModulePortLocator
 
 xout $rate.Value
 
@@ -24,10 +24,11 @@ endop
 opcode oControl_$rate, 0, $rate
 
 $rate.Value xin
-SPort = $port
-SControllerPortLocator sprintf "%f/%f/%s", giControllerPortDescriptor, $module, SPort
+SPort strget $port
 
-chnset $rate.Value, SControllerPortLocator
+SModulePortLocator sprintf "%d/%d/%f/%s", giModulePortDescriptor, $instance, $module, SPort
+
+chnset $rate.Value, SModulePortLocator
 
 endop
 

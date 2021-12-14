@@ -1,15 +1,12 @@
 i "link" 0 0 0 "oscilla" "mOscillator"
 i "link" 0 0 0 "mOscillator" "mOut"
 
-/*
-i "port" 0 0 0 "mOscillator" "amplitude" "cADSR"
-i "port" 0 0 0 "mOscillator" "frequency" "cADSR"
+i "port" 0 0 0 "mOscillator" "envelope" "cADSR"
 
-i "parameter_i" 0 0 0 "cADSR" "attack" .1
-i "parameter_i" 0 0 0 "cADSR" "decay" .1
-i "parameter_i" 0 0 0 "cADSR" "sustain" .3
-i "parameter_i" 0 0 0 "cADSR" "release" .1
-*/
+i "parameter_i" 0 0 0 "envelope" "attack" .1
+i "parameter_i" 0 0 0 "envelope" "decay" .1
+i "parameter_i" 0 0 0 "envelope" "sustain" .3
+i "parameter_i" 0 0 0 "envelope" "release" .1
 
 s
 

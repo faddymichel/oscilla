@@ -1,5 +1,7 @@
 instr cADSR
 
+$controllerNote
+
 iAttack oParameter_i "attack"
 iDecay oParameter_i "decay"
 iSustain oParameter_i "sustain"

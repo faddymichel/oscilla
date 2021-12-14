@@ -1,15 +1,15 @@
-giControllerParameterDescriptor = $descriptor
+giPortParameterDescriptor = $descriptor
 
 #define parameterOpcode(rate) #
 
 opcode oParameter_$rate, $rate, S
 
 SParameter xin
-iController = int ( p1 )
+SPort strget $port
 
-SControllerParameterLocator sprintf "%f/%f/%f/%s", giControllerParameterDescriptor, $program, iController, SParameter
+SPortParameterLocator sprintf "%d/%d/%s/%s", giPortParameterDescriptor, $program, SPort, SParameter
 
-$rate.Value chnget SControllerParameterLocator
+$rate.Value chnget SPortParameterLocator
 
 xout $rate.Value
 
@@ -17,12 +17,11 @@ endop
 
 opcode oAssignment_$rate, 0, iSS$rate
 
-iProgram, SController, SParameter, $rate.Value xin
-iController nstrnum SController
+iProgram, SPort, SParameter, $rate.Value xin
 
-SControllerParameterLocator sprintf "%f/%f/%f/%s", giControllerParameterDescriptor, iProgram, iController, SParameter
+SPortParameterLocator sprintf "%d/%d/%s/%s", giPortParameterDescriptor, iProgram, SPort, SParameter
 
-chnset $rate.Value, SControllerParameterLocator
+chnset $rate.Value, SPortParameterLocator
 
 endop
 
