@@ -34,7 +34,7 @@ while iChannel <= 16 do
 
 massign iChannel, "oscilla"
 
-iChannel = iChannel + 1
+iChannel += 1
 
 od
 
@@ -61,13 +61,13 @@ midinoteonkey $key, $velocity
 
 iOutputChannel = 0
 aOutput init 0
-giInstance = giInstance + 1
+giInstance += 1
 
 while iOutputChannel < nchnls do
 
 oPlug aOutput, iOutputChannel, giInstance
 
-iOutputChannel = iOutputChannel + 1
+iOutputChannel += 1
 
 od
 

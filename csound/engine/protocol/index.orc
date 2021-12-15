@@ -2,7 +2,7 @@ giDescriptor = 0
 
 #define descriptor #giDescriptor
 
-giDescriptor = giDescriptor + 1#
+giDescriptor += 1#
 
 #include "protocol/link.orc"
 #include "protocol/plug.orc"
