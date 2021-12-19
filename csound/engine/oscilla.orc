@@ -65,7 +65,9 @@ giInstance += 1
 
 while iOutputChannel < nchnls do
 
-oPlug aOutput, iOutputChannel, giInstance
+iTag = int ( frac ( p1 ) * 1000 ) / 1000 + iOutputChannel / 1000000
+
+oPlug aOutput, iOutputChannel, giInstance, iTag
 
 iOutputChannel += 1
 
@@ -121,3 +123,5 @@ $parameterInstrument(k)
 #include "modules/out.orc"
 
 #include "controllers/adsr.orc"
+
+#include "design.orc"

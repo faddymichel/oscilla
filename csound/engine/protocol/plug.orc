@@ -1,8 +1,8 @@
 giDestinationInputDescriptor = $descriptor
 
-opcode oPlug, 0, ajj
+opcode oPlug, 0, ajjj
 
-aSourceOutput, iOutputChannel, iInstance xin
+aSourceOutput, iOutputChannel, iInstance, iTag xin
 
 if iOutputChannel == -1 then
 
@@ -16,15 +16,14 @@ iInstance = $instance
 
 endif
 
-iChannel = $channel
-iSourceModule = int ( p1 )
+if iTag == -1 then
+
 iTag = frac ( p1 )
 
-if iTag == 0 then
-
-iTag = iChannel / 1000 + iOutputChannel / 1000000
-
 endif
+
+iChannel = $channel
+iSourceModule = int ( p1 )
 
 SLinkLocator sprintf "%d/%d/%d", giLinkDescriptor, $program, iSourceModule
 
