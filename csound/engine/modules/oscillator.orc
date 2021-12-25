@@ -1,24 +1,21 @@
 instr mOscillator
 
-$note
+tigoto performance
 
-cggoto iOutputChannel > 0, input
+$note
 
 aInput oInput
 
 aEnvelope oController_a "envelope"
 iFrequency = cpsmidinn ( iKey )
-aWave poscil aEnvelope, iFrequency
+iWaveFT vco2ift iFrequency, 0
+
+performance:
+
+aWave poscil aEnvelope, iFrequency, -1, -1
+;, iWaveFT
 
 aOutput = aWave + aInput
-
-goto plug
-
-input:
-
-aOutput oInput 0
-
-plug:
 
 oPlug aOutput
 

@@ -5,6 +5,7 @@ giDescriptor = 0
 giDescriptor += 1#
 
 #include "protocol/link.orc"
+#include "protocol/release.orc"
 #include "protocol/plug.orc"
 #include "protocol/port.orc"
 #include "protocol/controller.orc"

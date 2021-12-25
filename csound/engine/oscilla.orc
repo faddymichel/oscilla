@@ -1,14 +1,16 @@
 #include "performance.orc"
+#include "design.orc"
 
 #define program #p4#
 #define channel #p5#
 #define key #p6#
 #define velocity #p7#
-#define outputChannel #p8#
-#define instance #p9#
+#define instance #p8#
+#define counter #p9#
+#define outputChannel #p10#
 
-#define module #p10#
-#define port #p11#
+#define module #p11#
+#define port #p12#
 
 #define note #
 
@@ -16,8 +18,9 @@ iProgram = $program
 iChannel = $channel
 iKey = $key
 iVelocity = $velocity
-iOutputChannel = $outputChannel
 iInstance = $instance
+iCounter = $counter
+iOutputChannel = $outputChannel
 
 #
 
@@ -43,35 +46,68 @@ od
 
 
 giNextFT vco2init 31, 100
-giInstance = 0
+giChannels = 128 * 16 * nchnls
+giInstance [] init giChannels
 
 instr oscilla
 
-midiprogramchange $program
+;midiprogramchange $program
+$program = 0
 
+iMIDI = 1
 iChannel midichn
 
 if iChannel == 0 then
 
 iChannel = $channel
+iMIDI = 0
 
 endif
 
 midinoteonkey $key, $velocity
 
-iOutputChannel = 0
 aOutput init 0
-giInstance += 1
+iInstance = $key + ( iChannel - 1 ) * 128
+giInstance [ iInstance ] = giInstance [ iInstance ] + 1
+iCounter = giInstance [ iInstance ]
+iOutputChannel = 1
 
-while iOutputChannel < nchnls do
+while iOutputChannel <= nchnls do
 
-iTag = int ( frac ( p1 ) * 1000 ) / 1000 + iOutputChannel / 1000000
+iTag = ( iInstance + ( iOutputChannel - 1 ) * 2048 ) / giChannels
 
-oPlug aOutput, iOutputChannel, giInstance, iTag
+oPlug aOutput, iInstance, iCounter, iOutputChannel, iTag
 
 iOutputChannel += 1
 
 od
+
+print iMIDI
+
+/*
+cggoto iMIDI == 0, score
+
+kReleased init 0
+kStatus, kChannel, kKey, kVelocity midiin
+
+if kStatus == 128 && kKey == $key then
+
+kReleased = 1
+
+endif
+
+goto write
+
+score:
+*/
+
+kReleased release
+
+write:
+
+SReleaseLocator sprintf "%d/%d", giReleaseDescriptor, iInstance
+
+chnset kReleased, SReleaseLocator
 
 endin
 
@@ -81,8 +117,6 @@ instr link
 iProgram = p4
 SSourceModule strget p5
 SDestinationModule strget p6
-
-printf_i SSourceModule, 1
 
 oLink iProgram, SSourceModule, SDestinationModule
 
@@ -123,5 +157,4 @@ $parameterInstrument(k)
 #include "modules/out.orc"
 
 #include "controllers/adsr.orc"
-
-#include "design.orc"
+#include "listen.orc"

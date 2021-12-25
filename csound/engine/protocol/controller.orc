@@ -11,9 +11,10 @@ SControllerLocator sprintf "%d/%d/%d/%s", giControllerDescriptor, $program, iMod
 iController chnget SControllerLocator
 iController = iController + frac ( p1 )
 
-schedule iController, p2, p3, $program, $channel, $key, $velocity, $outputChannel, $instance, p1, SPort
+subinstrinit iController, $program, $channel, $key, $velocity, $instance, $counter, $outputChannel, p1, SPort
+;schedule iController, 0, -1, $program, $channel, $key, $velocity, $instance, $counter, $outputChannel, p1, SPort
 
-SModulePortLocator sprintf "%d/%d/%f/%s", giModulePortDescriptor, $instance, p1, SPort
+SModulePortLocator sprintf "%d/%d/%d/%d/%d/%s", giModulePortDescriptor, iModule, $instance, $counter, $outputChannel, SPort
 
 $rate.Value chnget SModulePortLocator
 
@@ -21,14 +22,26 @@ xout $rate.Value
 
 endop
 
-opcode oControl_$rate, 0, $rate
+opcode oControl_$rate, 0, $rate.j
 
-$rate.Value xin
+$rate.Value, iExtraTime xin
 SPort strget $port
 
-SModulePortLocator sprintf "%d/%d/%f/%s", giModulePortDescriptor, $instance, $module, SPort
+SModulePortLocator sprintf "%d/%d/%d/%d/%d/%s", giModulePortDescriptor, int ( $module ), $instance, $counter, $outputChannel, SPort
 
 chnset $rate.Value, SModulePortLocator
+
+if iExtraTime > -1 then
+
+SExtraTimeLocator sprintf "%d/%d/%d/%d", giExtraTimeDescriptor, $instance, $counter, $outputChannel
+
+kExtraTime init iExtraTime
+
+chnset kExtraTime, SExtraTimeLocator
+
+endif
+
+;oRelease p1, 0
 
 endop
 

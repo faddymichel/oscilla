@@ -1,18 +1,26 @@
 giDestinationInputDescriptor = $descriptor
 
-opcode oPlug, 0, ajjj
+opcode oPlug, 0, ajjjj
 
-aSourceOutput, iOutputChannel, iInstance, iTag xin
+aSourceOutput, iInstance, iCounter, iOutputChannel, iTag xin
 
-if iOutputChannel == -1 then
-
-iOutputChannel = $outputChannel
-
-endif
+tigoto end
 
 if iInstance == -1 then
 
 iInstance = $instance
+
+endif
+
+if iCounter == -1 then
+
+iCounter = $counter
+
+endif
+
+if iOutputChannel == -1 then
+
+iOutputChannel = $outputChannel
 
 endif
 
@@ -22,54 +30,40 @@ iTag = frac ( p1 )
 
 endif
 
-iChannel = $channel
 iSourceModule = int ( p1 )
 
 SLinkLocator sprintf "%d/%d/%d", giLinkDescriptor, $program, iSourceModule
 
 iDestinationModule chnget SLinkLocator
 
-SDestinationInputLocator sprintf "%d/%d/%f/%d", giDestinationInputDescriptor, iInstance, iDestinationModule, iOutputChannel
+SDestinationInputLocator sprintf "%d/%d/%d/%d/%d", giDestinationInputDescriptor, iDestinationModule, iInstance, iCounter, iOutputChannel
 
 chnset aSourceOutput, SDestinationInputLocator
 
 iDestinationModule = iDestinationModule + iTag
 
-schedule iDestinationModule, 0, - abs ( p3 ), $program, $channel, $key, $velocity, iOutputChannel, iInstance
+print iDestinationModule
+
+;schedule iDestinationModule, 0, -1, $program, $channel, $key, $velocity, iInstance, iCounter, iOutputChannel
+subinstrinit iDestinationModule, $program, $channel, $key, $velocity, iInstance, iCounter, iOutputChannel
+
+;oRelease iDestinationModule
+end:
 
 endop
 
 
-opcode oInput, a, j
-
-iInput xin
-p3 = abs ( p3 )
-
-cggoto iInput > -1, inputFromChannel
+opcode oInput, a, 0
 
 iDestinationModule = int ( p1 )
-iOutputChannel = $outputChannel
 
-goto readInput
-
-inputFromChannel:
-
-SLinkLocator sprintf "%d/%d/%d", giLinkDescriptor, $program, int ( p1 )
-
-iDestinationModule chnget SLinkLocator
-iOutputChannel = iInput
-
-readInput:
-
-SDestinationInputLocator sprintf "%d/%d/%f/%d", giDestinationInputDescriptor, $instance, iDestinationModule, iOutputChannel
+SDestinationInputLocator sprintf "%d/%d/%d/%d/%d", giDestinationInputDescriptor, iDestinationModule, $instance, $counter, $outputChannel
 
 aSourceOutput chnget SDestinationInputLocator
 
-cggoto iInput > -1, output
-
 chnclear SDestinationInputLocator
 
-output:
+;oRelease p1
 
 xout aSourceOutput
 
