@@ -1,0 +1,13 @@
+instr link
+
+iSourceModule = p4
+iDestinationModule = p5
+
+SSourceModule nstrstr iSourceModule
+SDestinationModule nstrstr iDestinationModule
+
+SDestinationModuleLocator sprintf "destination/%d", iSourceModule
+
+chnset iDestinationModule, SDestinationModuleLocator
+
+endin

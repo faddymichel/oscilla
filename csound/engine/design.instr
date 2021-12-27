@@ -1,0 +1,29 @@
+#include "parseLine.opcode"
+#include "parseDetail.opcode"
+
+gSWorkingDirectory pwd
+gSDesign sprintf "%s/default.design", gSWorkingDirectory
+
+read:
+
+SLine, iLine readfi gSDesign
+iLength strlen SLine
+SLine strsub SLine, 0, iLength - 1
+
+iBlank strcmp SLine, ""
+
+cigoto iBlank == 0, next
+
+SOrder, SDetails parseLine SLine
+SDetail1, SDetail2 parseLine SDetails
+
+iDetail1 parseDetail SDetail1
+iDetail2 parseDetail SDetail2
+
+prints "Working on order '%s' with details: '%s', '%s'\n", SOrder, SDetail1, SDetail2
+
+subinstrinit SOrder, iDetail1, iDetail2
+
+next:
+
+cigoto iLine != -1, read

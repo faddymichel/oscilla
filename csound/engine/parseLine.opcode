@@ -1,0 +1,12 @@
+opcode parseLine, SS, S
+
+SLine xin
+
+iIndex strindex SLine, " "
+
+SToken strsub SLine, 0, iIndex
+SRemaining strsub SLine, iIndex + 1
+
+xout SToken, SRemaining
+
+endop

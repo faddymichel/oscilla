@@ -1,0 +1,21 @@
+opcode parseDetail, i, S
+
+SEntry xin
+
+SType strsub SEntry, 0, 1
+iNumeric strcmp SType, "#"
+
+if iNumeric == 0 then
+
+SValue strsub SEntry, 1
+iEntry strtod SValue
+
+else
+
+iEntry nstrnum SEntry
+
+endif
+
+xout iEntry
+
+endop

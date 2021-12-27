@@ -1,0 +1,17 @@
+#include "link.instr"
+#include "design.instr"
+#include "plug.opcode"
+
+#define frequency #p4#
+#define velocity #p5#
+
+instr oscilla
+
+midinoteoncps $frequency, $velocity
+
+aOutput plug
+;aOutput subinstr 100, $frequency, $velocity
+
+out aOutput
+
+endin

@@ -1,0 +1,17 @@
+opcode plug, a, 0
+
+iSourceModule = int ( p1 )
+SDestinationModuleLocator sprintf "destination/%d", iSourceModule
+
+iDestinationModule chnget SDestinationModuleLocator
+iDestinationModule += frac ( p1 )
+
+aOutput subinstr iDestinationModule, p4, p5
+
+print iSourceModule
+print iDestinationModule
+;prints "%s\n", SDestinationModuleLocator
+
+xout aOutput
+
+endop
