@@ -1,16 +1,51 @@
-opcode plug, a, 0
+opcode plug, a, jjo
+
+iDestinationModule, iNumberOfVersions, iVersion xin
 
 iSourceModule = int ( p1 )
+
+if iDestinationModule == -1 then
+
 SDestinationModuleLocator sprintf "destination/%d", iSourceModule
 
 iDestinationModule chnget SDestinationModuleLocator
-iDestinationModule += frac ( p1 )
 
-aOutput subinstr iDestinationModule, p4, p5
+endif
 
-print iSourceModule
-print iDestinationModule
-;prints "%s\n", SDestinationModuleLocator
+if iNumberOfVersions == -1 then
+
+SNumberOfVersionsLocator sprintf "Versions/%d", iDestinationModule
+
+iNumberOfVersions chnget SNumberOfVersionsLocator
+
+if iNumberOfVersions == 0 then
+
+iNumberOfVersions = 1
+
+endif
+
+endif
+
+aOutput subinstr iDestinationModule, p4, p5, iVersion
+
+aOutput = aOutput / iNumberOfVersions
+
+iVersion += 1
+
+if iVersion < iNumberOfVersions then
+
+aRemainingVersionsOutput plug iDestinationModule, iNumberOfVersions, iVersion
+
+aOutput += aRemainingVersionsOutput
+
+endif
+
+SSourceModule nstrstr p1
+SDestinationModule nstrstr iDestinationModule
+
+prints "Plugging %s into %s\n", SSourceModule, SDestinationModule
+print iNumberOfVersions
+print iVersion
 
 xout aOutput
 

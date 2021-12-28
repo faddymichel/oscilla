@@ -1,10 +1,12 @@
 instr oscillator
 
-iWaveFT vco2ift p4, 3
+iVersion = p6
+
+iWaveFT vco2ift p4, iVersion
 aEnvelope plug
 ;aEnvelope subinstr 101
 
-aSound poscil aEnvelope * p5 * .25 / 127, p4;, iWaveFT
+aSound poscil aEnvelope * p5 * .25 / 127, p4 * ( iVersion + 1 ), iWaveFT
 
 out aSound
 
