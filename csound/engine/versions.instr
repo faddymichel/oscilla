@@ -1,0 +1,10 @@
+instr versions
+
+iDestinationModule = p4
+iNumberOfVersions = p5
+
+SNumberOfVersionsLocator sprintf "Versions/%d", iDestinationModule
+
+chnset iNumberOfVersions, SNumberOfVersionsLocator
+
+endin
