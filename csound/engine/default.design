@@ -1,4 +1,3 @@
-link oscilla oscillator
+link oscilla lowpass
+link lowpass oscillator
 link oscillator adsr
-
-versions oscillator #4

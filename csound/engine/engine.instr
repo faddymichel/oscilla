@@ -1,17 +1,17 @@
+#define key #p4#
+#define velocity #p5#
+#define version #p6#
+
 #include "link.instr"
 #include "versions.instr"
 #include "design.instr"
 #include "plug.opcode"
 
-#define frequency #p4#
-#define velocity #p5#
-
 instr oscilla
 
-midinoteoncps $frequency, $velocity
+;midinoteonkey $key, $velocity
 
 aOutput plug
-;aOutput subinstr 100, $frequency, $velocity
 
 out aOutput
 

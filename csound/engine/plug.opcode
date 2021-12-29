@@ -1,32 +1,35 @@
 opcode plug, a, jjo
 
-iDestinationModule, iNumberOfVersions, iVersion xin
+iSourceModule, iNumberOfVersions, iVersion xin
 
-iSourceModule = int ( p1 )
+midinoteonkey $key, $velocity
 
-if iDestinationModule == -1 then
+iDestinationModule = int ( p1 )
 
-SDestinationModuleLocator sprintf "destination/%d", iSourceModule
+if iSourceModule == -1 then
 
-iDestinationModule chnget SDestinationModuleLocator
+SSourceModuleLocator sprintf "destination/%d", iDestinationModule
+
+iSourceModule chnget SSourceModuleLocator
 
 endif
 
 if iNumberOfVersions == -1 then
 
-SNumberOfVersionsLocator sprintf "Versions/%d", iDestinationModule
+SNumberOfVersionsLocator sprintf "Versions/%d", iSourceModule
 
 iNumberOfVersions chnget SNumberOfVersionsLocator
 
 if iNumberOfVersions == 0 then
 
 iNumberOfVersions = 1
+iVersion = $version
 
 endif
 
 endif
 
-aOutput subinstr iDestinationModule, p4, p5, iVersion
+aOutput subinstr iSourceModule, $key, $velocity, $version
 
 aOutput = aOutput / iNumberOfVersions
 
@@ -34,18 +37,16 @@ iVersion += 1
 
 if iVersion < iNumberOfVersions then
 
-aRemainingVersionsOutput plug iDestinationModule, iNumberOfVersions, iVersion
+aRemainingVersionsOutput plug iSourceModule, iNumberOfVersions, iVersion
 
 aOutput += aRemainingVersionsOutput
 
 endif
 
-SSourceModule nstrstr p1
-SDestinationModule nstrstr iDestinationModule
+SdestinationModule nstrstr iDestinationModule
+SSourceModule nstrstr iSourceModule
 
-prints "Plugging %s into %s\n", SSourceModule, SDestinationModule
-print iNumberOfVersions
-print iVersion
+prints "Plugging %s %d/%d into %s\n", SSourceModule, iVersion, iNumberOfVersions, SdestinationModule
 
 xout aOutput
 
