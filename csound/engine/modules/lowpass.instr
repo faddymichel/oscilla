@@ -1,0 +1,11 @@
+instr lowpass
+
+aInput plug
+
+iFrequency = cpsmidinn ( $key ) * 2
+
+aFiltered tone aInput, iFrequency
+
+out aFiltered
+
+endin

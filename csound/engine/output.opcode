@@ -1,0 +1,13 @@
+opcode output, 0, aio
+
+aOutput, iInstance, iOutputChannel xin
+
+gaChannel [ iOutputChannel ] = gaChannel [ iOutputChannel ] + aOutput
+
+if iOutputChannel < nchnls - 1 then
+
+output aOutput, iInstance, iOutputChannel + 1
+
+endif
+
+endop

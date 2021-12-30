@@ -1,0 +1,16 @@
+opcode channel, 0, So
+
+SChannel, iOutputChannel xin
+
+iChannel nstrnum SChannel
+iChannel += iOutputChannel / nchnls
+
+schedule iChannel, 0, -1, iOutputChannel
+
+if iOutputChannel < nchnls - 1 then
+
+channel SChannel, iOutputChannel + 1
+
+endif
+
+endop

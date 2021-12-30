@@ -2,17 +2,23 @@
 #define velocity #p5#
 #define version #p6#
 
+#include "channel.opcode"
+#include "out.instr"
 #include "link.instr"
 #include "versions.instr"
 #include "design.instr"
+
 #include "plug.opcode"
+#include "output.opcode"
+
+giInstance = 0
 
 instr oscilla
 
-;midinoteonkey $key, $velocity
-
 aOutput plug
 
-out aOutput
+output aOutput, giInstance
+
+giInstance += 1
 
 endin

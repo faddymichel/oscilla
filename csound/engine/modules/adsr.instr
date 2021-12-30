@@ -1,0 +1,7 @@
+instr adsr
+
+aEnvelope madsr .1, .1, .5, .1
+
+out aEnvelope
+
+endin

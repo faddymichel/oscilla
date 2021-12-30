@@ -1,0 +1,24 @@
+instr oscillator
+
+iVersion = p6
+
+if iVersion == 0 then
+
+iWaveFT vco2ift p4, iVersion
+
+else
+
+iWaveFT = -1
+
+endif
+
+aEnvelope plug
+
+aAmplitude = aEnvelope * $velocity * .25 / 127
+iFrequency = cpsmidinn ( $key ) * cent ( iVersion * 10 )
+
+aSound poscil aAmplitude, iFrequency, iWaveFT
+
+out aSound
+
+endin

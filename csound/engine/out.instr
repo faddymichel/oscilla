@@ -1,0 +1,13 @@
+gaChannel [] init nchnls
+
+instr out
+
+iOutputChannel = p4
+
+outch iOutputChannel + 1, gaChannel [ iOutputChannel ]
+
+gaChannel [ iOutputChannel ] = 0
+
+endin
+
+channel "out"

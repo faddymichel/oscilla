@@ -46,8 +46,6 @@ endif
 SdestinationModule nstrstr iDestinationModule
 SSourceModule nstrstr iSourceModule
 
-prints "Plugging %s %d/%d into %s\n", SSourceModule, iVersion, iNumberOfVersions, SdestinationModule
-
 xout aOutput
 
 endop
