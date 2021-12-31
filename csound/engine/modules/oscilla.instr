@@ -1,0 +1,9 @@
+massign 0, "oscilla"
+
+instr oscilla
+
+aOutput plug
+
+output aOutput
+
+endin

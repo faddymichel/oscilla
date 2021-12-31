@@ -1,29 +1,16 @@
-#include "parseLine.opcode"
-#include "parseDetail.opcode"
+#include "link.opcode"
 
 gSWorkingDirectory pwd
 gSDesign sprintf "%s/default.design", gSWorkingDirectory
 
-read:
+iCompiled compileorc gSDesign
 
-SLine, iLine readfi gSDesign
-iLength strlen SLine
-SLine strsub SLine, 0, iLength - 1
+if iCompiled == 0 then
 
-iBlank strcmp SLine, ""
+prints "Oscilla: Designed finished successfully ...\n"
 
-cigoto iBlank == 0, next
+else
 
-SOrder, SDetails parseLine SLine
-SDetail1, SDetail2 parseLine SDetails
+prints "Oscilla: Could not finished Design successfully ...\n"
 
-iDetail1 parseDetail SDetail1
-iDetail2 parseDetail SDetail2
-
-prints "Working on order '%s' with details: '%s', '%s'\n", SOrder, SDetail1, SDetail2
-
-subinstrinit SOrder, iDetail1, iDetail2
-
-next:
-
-cigoto iLine != -1, read
+endif

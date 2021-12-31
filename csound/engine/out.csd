@@ -14,12 +14,14 @@ ksmps = 32
 nchnls = 2
 0dbfs = 1
 
-massign 0, "oscilla"
-
 giNextFT vco2init 31, 100
-#include "engine.instr"
-#include "modules.orc"
 
+#include "channel.opcode"
+#include "out.instr"
+#include "design.instr"
+
+#include "plug.opcode"
+#include "output.opcode"
 
 </CsInstruments>
 

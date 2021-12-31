@@ -1,3 +1,7 @@
+#define key #p4#
+#define velocity #p5#
+#define version #p6#
+
 opcode plug, a, jjo
 
 iSourceModule, iNumberOfVersions, iVersion xin

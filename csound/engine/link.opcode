@@ -1,0 +1,60 @@
+opcode link, 0, S[]o
+
+SModules [], iIndex xin
+iLength lenarray SModules
+
+if iIndex < iLength - 1 then
+
+link SModules, iIndex + 1
+
+endif
+
+SSourceModule = SModules [ iIndex ]
+
+if iIndex == iLength - 1 then
+
+SDestinationModule = "oscilla"
+
+else
+
+SDestinationModule = SModules [ iIndex + 1 ]
+
+endif
+
+SSourceModulePath sprintf "modules/%s.instr", SSourceModule
+iSourceCompiled compileorc SSourceModulePath
+
+SDestinationModulePath sprintf "modules/%s.instr", SDestinationModule
+iDestinationCompiled compileorc SDestinationModulePath
+
+if iSourceCompiled == -1 then
+
+prints "Oscilla: Could not find %s module at %s ...\n", SSourceModule, SSourceModulePath
+
+exitnow -1
+
+elseif iDestinationCompiled == -1 then
+
+prints "Oscilla: Could not find %s module at %s ...\n", SDestinationModule, SDestinationModulePath
+
+exitnow -1
+
+else
+
+prints "Oscilla: Compiled %s module successfully ...\n", SSourceModule
+
+endif
+
+iSourceModule nstrnum SSourceModule
+iDestinationModule nstrnum SDestinationModule
+
+print iSourceModule
+print iDestinationModule
+
+SSourceModuleLocator sprintf "destination/%d", iDestinationModule
+
+chnset iSourceModule, SSourceModuleLocator
+
+prints "Oscilla: Linked %s module to %s module ...\n", SSourceModule, SDestinationModule
+
+endop

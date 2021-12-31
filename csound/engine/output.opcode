@@ -1,12 +1,12 @@
-opcode output, 0, aio
+opcode output, 0, ao
 
-aOutput, iInstance, iOutputChannel xin
+aOutput, iOutputChannel xin
 
 gaChannel [ iOutputChannel ] = gaChannel [ iOutputChannel ] + aOutput
 
 if iOutputChannel < nchnls - 1 then
 
-output aOutput, iInstance, iOutputChannel + 1
+output aOutput, iOutputChannel + 1
 
 endif
 
