@@ -1,0 +1,13 @@
+opcode oPort, a, S
+
+SPort xin
+
+SControllerModuleLocator sprintf "controller/%s", SPort
+
+iControllerModule chnget SControllerModuleLocator
+
+aOutput subinstr iControllerModule, $key, $velocity, $partial
+
+xout aOutput
+
+endop

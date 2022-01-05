@@ -1,0 +1,10 @@
+opcode oController, 0, SS
+
+SPort, SControllerModule xin
+iControllerModule nstrnum SControllerModule
+
+SControllerModuleLocator sprintf "controller/%s", SPort
+
+chnset iControllerModule, SControllerModuleLocator
+
+endop

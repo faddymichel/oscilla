@@ -1,12 +1,14 @@
-opcode output, 0, ao
+opcode output, 0, p
 
-aOutput, iOutputChannel xin
+iOutputChannel xin
 
-gaChannel [ iOutputChannel ] = gaChannel [ iOutputChannel ] + aOutput
+aOutput subinstr "maestro"
 
-if iOutputChannel < nchnls - 1 then
+outch iOutputChannel, aOutput
 
-output aOutput, iOutputChannel + 1
+if iOutputChannel <= nchnls then
+
+output iOutputChannel + 1
 
 endif
 

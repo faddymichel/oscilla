@@ -2,8 +2,14 @@ massign 0, "oscilla"
 
 instr oscilla
 
+output
+
+endin
+
+instr maestro
+
 aOutput plug
 
-output aOutput
+out aOutput
 
 endin

@@ -1,6 +1,6 @@
 instr adsr
 
-aEnvelope madsr .1, .1, .5, .1
+aEnvelope madsr .2, .05, .5, .1
 
 out aEnvelope
 

@@ -1,12 +1,18 @@
 #define key #p4#
 #define velocity #p5#
-#define version #p6#
+#define partial #p6#
 
-opcode plug, a, jjo
+opcode plug, a, jjoj
 
-iSourceModule, iNumberOfVersions, iVersion xin
+iSourceModule, iNumberOfPartials, iPartial, iNote xin
+
+if iNote == -1 then
 
 midinoteonkey $key, $velocity
+
+iNote += 1
+
+endif
 
 iDestinationModule = int ( p1 )
 
@@ -18,32 +24,32 @@ iSourceModule chnget SSourceModuleLocator
 
 endif
 
-if iNumberOfVersions == -1 then
+if iNumberOfPartials == -1 then
 
-SNumberOfVersionsLocator sprintf "Versions/%d", iSourceModule
+SNumberOfPartialsLocator sprintf "Partials/%d", iSourceModule
 
-iNumberOfVersions chnget SNumberOfVersionsLocator
+iNumberOfPartials chnget SNumberOfPartialsLocator
 
-if iNumberOfVersions == 0 then
+if iNumberOfPartials == 0 then
 
-iNumberOfVersions = 1
-iVersion = $version
-
-endif
+iNumberOfPartials = 1
+iPartial = $partial
 
 endif
 
-aOutput subinstr iSourceModule, $key, $velocity, $version
+endif
 
-aOutput = aOutput / iNumberOfVersions
+aOutput subinstr iSourceModule, $key, $velocity, $partial
 
-iVersion += 1
+aOutput = aOutput / iNumberOfPartials
 
-if iVersion < iNumberOfVersions then
+iPartial += 1
 
-aRemainingVersionsOutput plug iSourceModule, iNumberOfVersions, iVersion
+if iPartial < iNumberOfPartials then
 
-aOutput += aRemainingVersionsOutput
+aRemainingPartialsOutput plug iSourceModule, iNumberOfPartials, iPartial, iNote
+
+aOutput += aRemainingPartialsOutput
 
 endif
 

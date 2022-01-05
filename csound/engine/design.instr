@@ -1,10 +1,9 @@
-#include "link.opcode"
-
 gSWorkingDirectory pwd
 gSDesign sprintf "%s/default.design", gSWorkingDirectory
 
 iCompiled compileorc gSDesign
 
+/*
 if iCompiled == 0 then
 
 prints "Oscilla: Designed finished successfully ...\n"
@@ -14,3 +13,4 @@ else
 prints "Oscilla: Could not finished Design successfully ...\n"
 
 endif
+*/

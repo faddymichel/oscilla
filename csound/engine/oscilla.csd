@@ -16,12 +16,17 @@ nchnls = 2
 
 giNextFT vco2init 31, 100
 
-#include "channel.opcode"
-#include "out.instr"
-#include "design.instr"
-
 #include "plug.opcode"
 #include "output.opcode"
+#include "port.opcode"
+
+#include "maestro.instr"
+#include "modules.orc"
+
+#include "link.opcode"
+#include "controller.opcode"
+
+#include "design.instr"
 
 </CsInstruments>
 

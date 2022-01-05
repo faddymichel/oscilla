@@ -1,60 +1,38 @@
-opcode link, 0, S[]o
+opcode link, 0, S[]jj
 
-SModules [], iIndex xin
+SModules [], iIndex, iLength xin
+
+if iLength == -1 then
+
 iLength lenarray SModules
 
-if iIndex < iLength - 1 then
-
-link SModules, iIndex + 1
-
 endif
 
-SSourceModule = SModules [ iIndex ]
+if iIndex == -1 then
 
-if iIndex == iLength - 1 then
-
-SDestinationModule = "oscilla"
+SDestinationModule = "maestro"
 
 else
 
-SDestinationModule = SModules [ iIndex + 1 ]
+SDestinationModule = SModules [ iIndex ]
 
 endif
 
-SSourceModulePath sprintf "modules/%s.instr", SSourceModule
-iSourceCompiled compileorc SSourceModulePath
-
-SDestinationModulePath sprintf "modules/%s.instr", SDestinationModule
-iDestinationCompiled compileorc SDestinationModulePath
-
-if iSourceCompiled == -1 then
-
-prints "Oscilla: Could not find %s module at %s ...\n", SSourceModule, SSourceModulePath
-
-exitnow -1
-
-elseif iDestinationCompiled == -1 then
-
-prints "Oscilla: Could not find %s module at %s ...\n", SDestinationModule, SDestinationModulePath
-
-exitnow -1
-
-else
-
-prints "Oscilla: Compiled %s module successfully ...\n", SSourceModule
-
-endif
+SSourceModule = SModules [ iIndex + 1 ]
 
 iSourceModule nstrnum SSourceModule
 iDestinationModule nstrnum SDestinationModule
-
-print iSourceModule
-print iDestinationModule
 
 SSourceModuleLocator sprintf "destination/%d", iDestinationModule
 
 chnset iSourceModule, SSourceModuleLocator
 
 prints "Oscilla: Linked %s module to %s module ...\n", SSourceModule, SDestinationModule
+
+if iIndex < iLength - 2 then
+
+link SModules, iIndex + 1
+
+endif
 
 endop

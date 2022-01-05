@@ -1,3 +1,5 @@
-SModules [] fillarray "adsr", "oscillator", "lowpass"
+SModules [] fillarray "lowpass", "oscillator"
 
 link SModules
+
+oController "envelope", "adsr"

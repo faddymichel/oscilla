@@ -1,10 +1,10 @@
 instr oscillator
 
-iVersion = p6
+iPartial = $partial
 
-if iVersion == 0 then
+if iPartial == 0 then
 
-iWaveFT vco2ift p4, iVersion
+iWaveFT vco2ift p4, iPartial
 
 else
 
@@ -12,10 +12,10 @@ iWaveFT = -1
 
 endif
 
-aEnvelope plug
+aEnvelope oPort "envelope"
 
 aAmplitude = aEnvelope * $velocity * .25 / 127
-iFrequency = cpsmidinn ( $key ) * cent ( iVersion * 10 )
+iFrequency = cpsmidinn ( $key ) * cent ( iPartial * 10 )
 
 aSound poscil aAmplitude, iFrequency, iWaveFT
 

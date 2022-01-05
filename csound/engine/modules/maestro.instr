@@ -1,0 +1,11 @@
+massign 0, "maestro"
+
+instr maestro
+
+aOutput plug
+
+out aOutput, aOutput
+
+;output
+
+endin
