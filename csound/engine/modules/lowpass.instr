@@ -1,6 +1,6 @@
 instr lowpass
 
-aInput plug
+$plug(aInput)
 
 iFrequency = cpsmidinn ( $key ) * 2
 

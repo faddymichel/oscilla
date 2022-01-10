@@ -1,0 +1,9 @@
+giDescriptor = 0
+
+#define descriptor(name) #
+
+gi$name.Descriptor = giDescriptor
+
+giDescriptor += 1
+
+#

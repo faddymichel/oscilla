@@ -1,0 +1,27 @@
+$descriptor(Module)
+
+opcode oCreate, 0, SS
+
+SPrototype, SModule xin
+
+iModule nstrnum SPrototype
+
+SModuleLocator sprintf "%d/%s", giModuleDescriptor, SModule
+
+chnset iModule, SModuleLocator
+
+prints "Oscilla: Created new %s module named %s ...\n", SPrototype, SModule
+
+endop
+
+opcode oGet, i, S
+
+SModule xin
+
+SModuleLocator sprintf "%d/%s", giModuleDescriptor, SModule
+
+iModule chnget SModuleLocator
+
+xout iModule
+
+endop

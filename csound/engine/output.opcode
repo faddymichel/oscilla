@@ -2,7 +2,10 @@ opcode output, 0, p
 
 iOutputChannel xin
 
-aOutput subinstr "maestro"
+iModule nstrnum "maestro"
+iModule = iModule + .5
+
+aOutput subinstr iModule, "maestro"
 
 outch iOutputChannel, aOutput
 

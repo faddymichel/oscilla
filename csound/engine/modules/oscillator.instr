@@ -1,24 +1,18 @@
 instr oscillator
 
-iPartial = $partial
+$plug(aInput)
 
-if iPartial == 0 then
+iFrequency = cpsmidinn ( $key )
 
-iWaveFT vco2ift p4, iPartial
+iWaveFT vco2ift iFrequency, 0
 
-else
-
-iWaveFT = -1
-
-endif
-
-aEnvelope oPort "envelope"
+aEnvelope oPlug "envelope", -1
 
 aAmplitude = aEnvelope * $velocity * .25 / 127
-iFrequency = cpsmidinn ( $key ) * cent ( iPartial * 10 )
+aFrequency = cent ( aEnvelope ) * iFrequency
 
-aSound poscil aAmplitude, iFrequency, iWaveFT
+aSound poscil aAmplitude, aFrequency, iWaveFT
 
-out aSound
+out aInput + aSound
 
 endin

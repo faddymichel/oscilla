@@ -1,60 +1,38 @@
-#define key #p4#
-#define velocity #p5#
-#define partial #p6#
+#define module #p4#
+#define key #p5#
+#define velocity #p6#
 
-opcode plug, a, jjoj
+#define plug(signal) #midinoteonkey $key, $velocity
 
-iSourceModule, iNumberOfPartials, iPartial, iNote xin
+SModule = $module
 
-if iNote == -1 then
+$signal oPlug SModule#
 
-midinoteonkey $key, $velocity
+opcode oPlug, a, So
 
-iNote += 1
+SModule, iDefault xin
 
-endif
+if iDefault == -1 then
 
-iDestinationModule = int ( p1 )
+SLinkedModule = SModule
 
-if iSourceModule == -1 then
+iLinkedModule oGet SLinkedModule
 
-SSourceModuleLocator sprintf "destination/%d", iDestinationModule
+else
 
-iSourceModule chnget SSourceModuleLocator
-
-endif
-
-if iNumberOfPartials == -1 then
-
-SNumberOfPartialsLocator sprintf "Partials/%d", iSourceModule
-
-iNumberOfPartials chnget SNumberOfPartialsLocator
-
-if iNumberOfPartials == 0 then
-
-iNumberOfPartials = 1
-iPartial = $partial
+iLinkedModule, SLinkedModule oLinked SModule
 
 endif
 
-endif
+if iLinkedModule > 0 then
 
-aOutput subinstr iSourceModule, $key, $velocity, $partial
+aOutput subinstr iLinkedModule, SLinkedModule, $key, $velocity
 
-aOutput = aOutput / iNumberOfPartials
+else
 
-iPartial += 1
-
-if iPartial < iNumberOfPartials then
-
-aRemainingPartialsOutput plug iSourceModule, iNumberOfPartials, iPartial, iNote
-
-aOutput += aRemainingPartialsOutput
+aOutput init iDefault
 
 endif
-
-SdestinationModule nstrstr iDestinationModule
-SSourceModule nstrstr iSourceModule
 
 xout aOutput
 

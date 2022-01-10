@@ -1,5 +1,13 @@
-SModules [] fillarray "lowpass", "oscillator"
+oCreate "lowpass", "filter"
+oCreate "oscillator", "carrier-wave"
 
-link SModules
+oLink "maestro", "filter"
+oLink "filter", "carrier-wave"
 
-oController "envelope", "adsr"
+oCreate "adsr", "envelope"
+
+;oCreate "lfo", "modulator"
+
+;oLink "envelope", "modulator"
+
+;oController "envelope", "envelope"

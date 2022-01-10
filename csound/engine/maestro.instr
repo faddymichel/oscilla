@@ -8,7 +8,7 @@ endin
 
 instr maestro
 
-aOutput plug
+$plug(aOutput)
 
 out aOutput
 

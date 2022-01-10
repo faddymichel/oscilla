@@ -2,11 +2,13 @@ opcode oPort, a, S
 
 SPort xin
 
-SControllerModuleLocator sprintf "controller/%s", SPort
+SControllerModuleLocator sprintf "%d/%s", giControllerModuleDescriptor, SPort
 
-iControllerModule chnget SControllerModuleLocator
+SControllerModule chnget SControllerModuleLocator
 
-aOutput subinstr iControllerModule, $key, $velocity, $partial
+iControllerModule oGet SControllerModule
+
+aOutput subinstr iControllerModule, SControllerModule;, $key, $velocity, $partial
 
 xout aOutput
 

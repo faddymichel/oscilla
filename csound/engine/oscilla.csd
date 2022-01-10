@@ -16,15 +16,17 @@ nchnls = 2
 
 giNextFT vco2init 31, 100
 
+#include "descriptor.macro"
+
+#include "module.opcode"
+#include "link.opcode"
+#include "controller.opcode"
 #include "plug.opcode"
 #include "output.opcode"
 #include "port.opcode"
 
 #include "maestro.instr"
 #include "modules.orc"
-
-#include "link.opcode"
-#include "controller.opcode"
 
 #include "design.instr"
 

@@ -1,0 +1,13 @@
+instr lfo
+
+$plug(aInput), 1
+
+iAmplitude = $velocity / 127
+iFrequency = 50; cpsmidinn ( $key )
+iWaveType = 2
+
+aModulator lfo iAmplitude, iFrequency, iWaveType
+
+out aModulator * aInput
+
+endin

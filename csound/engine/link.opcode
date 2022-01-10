@@ -1,38 +1,27 @@
-opcode link, 0, S[]jj
+$descriptor(LinkedModule)
 
-SModules [], iIndex, iLength xin
+opcode oLink, 0, SS
 
-if iLength == -1 then
+SModule, SLinkedModule xin
 
-iLength lenarray SModules
+SLinkedModuleLocator sprintf "%d/%s", giLinkedModuleDescriptor, SModule
 
-endif
+chnset SLinkedModule, SLinkedModuleLocator
 
-if iIndex == -1 then
+prints "Oscilla: Linked %s module to %s module ...\n", SLinkedModule, SModule
 
-SDestinationModule = "maestro"
+endop
 
-else
+opcode oLinked, iS, S
 
-SDestinationModule = SModules [ iIndex ]
+SModule xin
 
-endif
+SLinkedModuleLocator sprintf "%d/%s", giLinkedModuleDescriptor, SModule
 
-SSourceModule = SModules [ iIndex + 1 ]
+SLinkedModule chnget SLinkedModuleLocator
 
-iSourceModule nstrnum SSourceModule
-iDestinationModule nstrnum SDestinationModule
+iLinkedModule oGet SLinkedModule
 
-SSourceModuleLocator sprintf "destination/%d", iDestinationModule
-
-chnset iSourceModule, SSourceModuleLocator
-
-prints "Oscilla: Linked %s module to %s module ...\n", SSourceModule, SDestinationModule
-
-if iIndex < iLength - 2 then
-
-link SModules, iIndex + 1
-
-endif
+xout iLinkedModule, SLinkedModule
 
 endop

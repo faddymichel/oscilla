@@ -1,7 +1,9 @@
 instr adsr
 
-aEnvelope madsr .2, .05, .5, .1
+$plug(aInput), 1
 
-out aEnvelope
+aEnvelope madsr 1/16, 1/32, .1, 1/128
+
+out aEnvelope * aInput
 
 endin

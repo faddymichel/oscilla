@@ -1,0 +1,37 @@
+$descriptor(Module)
+
+opcode oCreate, 0, SS
+
+SPrototype, SModule xin
+
+SPath sprintf "modules/%s.instr", SPrototype
+
+iCompiled compileorc SPath
+
+if iCompiled != 0 then
+
+prints "Oscilla: #issue Failed to compile %s module ...\n", SPrototype
+
+exitnow -1
+
+endif
+
+iModule nstrnum SPrototype
+
+SModuleLocator sprintf "%d/%s", giModuleDescriptor, SModule
+
+chnset iModule, SModuleLocator
+
+endop
+
+opcode oGet, i, S
+
+SModule xin
+
+SModuleLocator sprintf "%d/%s", giModuleDescriptor, SModule
+
+iModule chnget SModuleLocator
+
+xout iModule
+
+endop

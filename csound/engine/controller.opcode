@@ -1,10 +1,11 @@
+$descriptor(ControllerModule)
+
 opcode oController, 0, SS
 
 SPort, SControllerModule xin
-iControllerModule nstrnum SControllerModule
 
-SControllerModuleLocator sprintf "controller/%s", SPort
+SControllerModuleLocator sprintf "%d/%s", giControllerModuleDescriptor, SPort
 
-chnset iControllerModule, SControllerModuleLocator
+chnset SControllerModule, SControllerModuleLocator
 
 endop
