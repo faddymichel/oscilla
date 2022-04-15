@@ -1,0 +1,18 @@
+instr oscilla
+
+kFrequency init 0
+kVelocity init 0
+
+midinoteoncps kFrequency, kVelocity
+
+aOutput subinstr "plug", p1, kFrequency, kVelocity
+
+out aOutput
+
+endin
+
+#include "protocol/plug.instr"
+#include "protocol/link.instr"
+
+subinstrinit "link", "oscilla"; , "oscillator"
+;subinstrinit "link", "oscillator", "adsr"

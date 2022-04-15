@@ -1,0 +1,13 @@
+/*
+
+iWave allowed values:
+
+0: sawtooth
+1: 4 * x * ( 1 - x ) (integrated sawtooth)
+2: pulse (not normalized)
+3: square wave
+4: triangle
+
+*/
+
+kWaveFT vco2ft kFrequency, iWave

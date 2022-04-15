@@ -1,0 +1,12 @@
+instr plug
+
+iSourceModule = int ( p4 )
+SDestinationModuleLocator sprintf "destination/%d", iSourceModule
+
+iDestinationModule chnget SDestinationModuleLocator
+
+aOutput subinstr iDestinationModule, p5, p6
+
+out aOutput
+
+endin

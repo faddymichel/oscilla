@@ -1,0 +1,19 @@
+instr link
+
+SSourceModule = p4
+SDestinationModule strget p5
+
+prints "Linking %s to %s together ...\n", SSourceModule, SDestinationModule
+
+/*
+iSourceModule nstrnum SSourceModule
+iDestinationModule nstrnum SDestinationModule
+
+SDestinationModuleLocator sprintf "destination/%d", iSourceModule
+
+chnset iDestinationModule, SDestinationModuleLocator
+
+prints "Linked %s module (instrument #%d) to %s module (instrument #%d) ...\n", SSourceModule, iSourceModule, SDestinationModule, iDestinationModule
+
+*/
+endin
