@@ -2,6 +2,15 @@ massign 0, "oscilla"
 
 instr oscilla
 
+iChannel midichn
+
+;print iChannel
+
+iProgram = -1
+midiprogramchange iProgram
+
+;print iProgram
+
 output
 
 endin

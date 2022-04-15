@@ -1,0 +1,28 @@
+instr piano
+
+$plug(aInput)
+
+iFrequency = cpsmidinn ( $key )
+iStrings = 13
+iStringsDetune = 10
+iStiffness = 1
+iDecay = 3
+iHighFrequencyLoss = .002
+iLeftBound = 2
+iRightBound = 2
+iHammerMass = 1
+iHammerVibration = 5000
+iHammerInitialPosition = -.001
+iHammerStrikePosition = .09
+iHammerStrikeVelocity = $velocity
+iScanningFrequency = 0
+iScanningSpread = .1
+
+aTone prepiano iFrequency, \
+iStrings, iStringsDetune, iStiffness, iDecay, iHighFrequencyLoss, iLeftBound, iRightBound, \
+iHammerMass, iHammerVibration, iHammerInitialPosition, iHammerStrikePosition, iHammerStrikeVelocity, \
+iScanningFrequency, iScanningSpread
+
+out aTone + aInput
+
+endin

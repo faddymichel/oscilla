@@ -1,0 +1,16 @@
+instr fmBell
+
+$plug(aInput)
+
+iFrequency = cpsmidinn ( $key )
+
+aEnvelope oPlug "envelope", -1
+
+kAmplitude = k ( aEnvelope ) * $velocity * .05 / 127
+kFrequency = cent ( k ( aEnvelope ) ) * iFrequency * 2
+
+aSound fmbell kAmplitude, kFrequency, 5, 5, .005, 6
+
+out aInput + aSound
+
+endin

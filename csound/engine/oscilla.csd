@@ -2,6 +2,7 @@
 
 <CsOptions>
 
+-Ma
 -odac
 -T
 
@@ -29,6 +30,20 @@ giNextFT vco2init 31, 100
 #include "modules.orc"
 
 #include "design.instr"
+
+instr status
+
+kStatus midifilestatus
+
+cggoto kStatus == 1, end
+
+printf "Oscilla: End of Track ...\n", 1
+
+end:
+
+endin
+
+schedule "instr", 0, -1
 
 </CsInstruments>
 
