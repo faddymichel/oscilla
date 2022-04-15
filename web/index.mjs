@@ -1,8 +1,8 @@
-import play from './play/index.mjs';
+import setting from './setting/index.mjs';
 
 window .onload = () => {
 
-const oscilla = Scenarist ( play );
+const oscilla = Scenarist ( setting );
 
 document .onkeydown = document .onkeyup = oscilla;
 

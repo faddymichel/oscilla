@@ -9,10 +9,13 @@ const target = oscilla ( scene .direction, ... scene .details );
 
 note .then ( note => {
 
-target .then ( target => {
+target .then ( async target => {
 
-if ( target ?.output )
-note .output .connect ( target .output );
+const noteOutput = await note .output;
+const targetOutput = await target .output;
+
+if ( targetOutput )
+noteOutput .connect ( targetOutput );
 
 note .target = target;
 
