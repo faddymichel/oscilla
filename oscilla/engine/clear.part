@@ -1,0 +1,7 @@
+instr clear
+
+chnclear "sound"
+
+endin
+
+schedule "clear", 0, -1

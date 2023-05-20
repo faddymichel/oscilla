@@ -1,0 +1,7 @@
+instr exit
+
+prints "#> info Yallah bye!\n"
+
+exitnow
+
+endin

@@ -1,0 +1,22 @@
+; Do C
+maqamStep "rast", 0, 0
+
+; Re D
+maqamStep "rast", 2, 0
+
+; Mi E half-flat
+maqamStep "rast", 4, -1
+
+; Fa F
+maqamStep "rast", 5, 0
+
+; Sol G
+maqamStep "rast", 7, 0
+
+; La A
+maqamStep "rast", 9, 0
+
+; Si B half-flat
+maqamStep "rast", 11, -1
+
+maqam "rast"

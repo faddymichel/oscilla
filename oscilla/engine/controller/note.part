@@ -1,0 +1,54 @@
+#define key #p4#
+#define velocity #p5#
+#define frequency #p6#
+
+massign 0, "ControllerNoteOn"
+
+giSynthesizer nstrnum "synthesizer"
+giUnreleasedNotes init 0
+giMaqam chnget "maqam-hijaz-ft"
+giMode = 1
+
+giNextFT vco2init 31, 100000
+
+instr ControllerNoteOn
+
+midinoteonkey $key, $velocity
+
+$frequency cpstmid giMaqam
+
+if giMode == 1 then
+
+schedule giSynthesizer, 0, -1, $key, $velocity, $frequency
+
+giUnreleasedNotes += 1
+
+kReleased release
+
+if kReleased == 1 then
+
+schedulek "ControllerNoteOff", 0, 0
+
+endif
+
+elseif giMode == 2 then
+
+aOutput subinstr "synthesizer", $key, $velocity, $frequency
+
+out aOutput
+
+endif
+
+endin
+
+instr ControllerNoteOff
+
+giUnreleasedNotes += -1
+
+if giUnreleasedNotes == 0 then
+
+schedule -giSynthesizer, 0, -1
+
+endif
+
+endin

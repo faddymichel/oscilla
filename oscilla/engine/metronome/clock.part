@@ -1,0 +1,45 @@
+$parameter(k'MetroTempo'90)
+$parameter(k'MetroMeasure'4)
+$parameter(k'MetroDivisions'4)
+
+instr MetroClock
+
+SStamp strget p4
+
+prints "controller cue %s Metronome started\n", SStamp
+
+gkMetroBeats init 0
+gkMetroBars init 0
+
+gkMetroTick init -1
+gkMetroTock init -1
+
+kMetronome metro ( gkMetroTempo / 60 ) * ( gkMetroDivisions / gkMetroMeasure )
+
+if kMetronome == 1 then
+
+gkMetroBeats += 1
+
+if gkMetroBeats == gkMetroDivisions then
+
+gkMetroTick = 0
+gkMetroTock= 1
+
+gkMetroBeats = 0
+gkMetroBars += 1
+
+else
+
+gkMetroTick= 1
+gkMetroTock = 0
+
+endif
+
+else
+
+gkMetroTick = -1
+gkMetroTock = -1
+
+endif
+
+endin

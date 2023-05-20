@@ -1,0 +1,77 @@
+opcode ControllerControl, 0, Sj
+
+SName, iProgram xin
+
+iProgram ControllerProgram iProgram
+
+SNumber sprintf "controller/control-number/%d/%s", iProgram, SName
+
+iNumber chnget "controller/control-index"
+
+iNumber += 1
+
+chnset iNumber, "controller/control-index"
+
+chnset iNumber, SNumber
+
+SNameLocation sprintf "controller/control-name/%d/%d", iProgram, iNumber
+
+chnset SName, SNameLocation
+
+endop
+
+opcode ControllerProgram, i, j
+
+iProgram xin
+
+if iProgram < 1 then
+
+iProgram chnget "controller/program-active"
+
+if iProgram < 1 then
+
+iProgram = 1
+
+chnset iProgram, "controller/program-active"
+
+endif
+
+endif
+
+xout int ( iProgram )
+
+endop
+
+opcode ControllerControlGet, k, Sj
+
+SName, iProgram xin
+
+iProgram ControllerProgram iProgram
+
+SNumber sprintf "controller/control-number/%d/%s", iProgram, SName
+
+iNumber chnget SNumber
+
+SValue sprintf "controller/control-value/%d/%d/", iProgram, iNumber
+
+kValue chnget SValue
+
+xout kValue
+
+endop
+
+opcode ControllerControlSet, 0, Skj
+
+SName, kValue, iProgram xin
+
+iProgram ControllerProgram iProgram
+
+SNumber sprintf "controller/control-number/%d/%s", iProgram, SName
+
+iNumber chnget SNumber
+
+SValue sprintf "controller/control-value/%d/%d", iProgram, iNumber
+
+chnset kValue, SValue
+
+endop

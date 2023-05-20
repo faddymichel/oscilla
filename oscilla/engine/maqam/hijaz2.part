@@ -1,0 +1,22 @@
+; Do C
+maqamStep "hijaz2", 0, 0
+
+; Re D
+maqamStep "hijaz2", 2, 0
+
+; Mi E
+maqamStep "hijaz2", 4, -2
+
+; Fa F
+maqamStep "hijaz2", 5, 0
+
+; Sol G
+maqamStep "hijaz2", 7, 0
+
+; La A
+maqamStep "hijaz2", 9, 0
+
+; Si B
+maqamStep "hijaz2", 11, -1
+
+maqam "hijaz2"

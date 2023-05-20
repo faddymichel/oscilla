@@ -1,0 +1,3 @@
+KeyboardAssign "metronome", "s", "MetroClock"
+KeyboardAssign "metronome", "d", "MetroTempoIncrease"
+KeyboardAssign "metronome", "a", "MetroTempoDecrease"

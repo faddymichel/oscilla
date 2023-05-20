@@ -1,0 +1,9 @@
+instr output
+
+aSound chnget "sound"
+
+out aSound
+
+endin
+
+schedule "output", 0, -1

@@ -1,0 +1,18 @@
+#define MetroTick #440#
+#define MetroTock #220#
+
+instr MetroTicktock
+
+if gkMetroTick == 1 then
+
+schedulek "Beep", 0, 1/32, $MetroTick
+
+elseif gkMetroTock== 1 then
+
+schedulek "Beep", 0, 1/32, $MetroTock
+
+endif
+
+endin
+
+schedule "MetroTicktock", 0, -1

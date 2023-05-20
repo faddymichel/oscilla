@@ -1,0 +1,27 @@
+#define SynthWave(wave) #if kWave == $wave then
+
+kWaveFT vco2ft $frequency, $wave
+
+#
+
+instr synthesizer
+
+iTied tival
+
+if iTied == 0 then
+
+kAmplitudeEnvelope init 0
+
+endif
+
+kAmplitudeEnvelope linsegr i ( kAmplitudeEnvelope ), 1/8, 1, 1/8, .25, 1/4, 0
+
+;aAmplitude = kAmplitudeEnvelope * $velocity / 127
+
+iInitial = i ( kAmplitudeEnvelope )
+
+aNote poscil kAmplitudeEnvelope * .25, $frequency, -1, -iTied
+
+chnmix aNote, "sound"
+
+endin

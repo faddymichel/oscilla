@@ -1,0 +1,38 @@
+$parameter(k'RecorderStatus'0)
+
+ginstrRecorderWrite nstrnum "RecorderWrite"
+
+instr RecorderRecord
+
+if gkRecorderStatus == 1 && gkMetroBeats == 0 then
+
+gkRecorderStatus = 2
+
+schedulek ginstrRecorderWrite, 0, -1
+schedulek "Beep", 0, 1/32, 880
+
+elseif gkRecorderStatus == -1 && gkMetroBeats == 0 then
+
+gkRecorderStatus = 0
+
+schedulek -ginstrRecorderWrite, 0, 0
+schedulek "Beep", 0, 1/32, 880
+
+endif
+
+endin
+
+instr RecorderWrite
+
+aSound chnget "sound"
+
+iTimeStamp date
+
+SName sprintf "%s_%d", gSName, iTimeStamp
+
+fout SName, 14, aSound
+fout gSName, 14, aSound
+
+endin
+
+schedule "Recorder", 0, -1

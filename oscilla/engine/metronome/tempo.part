@@ -1,0 +1,23 @@
+instr MetroTempo
+
+gkMetroTempo init p4
+
+prints "metronome tempo %d\n", gkMetroTempo
+
+endin
+
+instr MetroTempoIncrease
+
+gkMetroTempo init i ( gkMetroTempo ) + 1
+
+prints "metronome tempo %d\n", gkMetroTempo
+
+endin
+
+instr MetroTempoDecrease
+
+gkMetroTempo init i ( gkMetroTempo ) - 1
+
+prints "metronome tempo %d\n", gkMetroTempo
+
+endin
