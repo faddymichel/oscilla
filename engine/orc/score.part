@@ -1,0 +1,40 @@
+opcode oScore, S, i[]
+
+iScore xin
+
+iLength lenarray iScore
+
+SScore = "i"
+iIndex = 0
+
+while iIndex < iLength do
+
+SScore sprintf "%s %f", SScore, iScore [ iIndex ]
+
+iIndex += 1
+
+od
+
+xout SScore
+
+endop
+
+opcode oSchedule, 0, i[]k
+
+iScore, kScore xin
+
+SScore oScore iScore
+
+scoreline SScore, kScore
+
+endop
+
+opcode oSchedule_i, 0, i[]
+
+iScore xin
+
+SScore oScore iScore
+
+scoreline_i SScore
+
+endop

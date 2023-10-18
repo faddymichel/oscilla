@@ -1,0 +1,67 @@
+giDial = 0
+
+instr 13, oscilla
+
+iInstance = frac ( p1 )
+iOrder = int ( p4 )
+
+if iOrder == 233 then
+
+iTempo = p9
+iLength = p10
+iBeat = ( 4 / p11 ) * 60 / iTempo
+iBar = iBeat * iLength
+
+oiset "tempo", iTempo
+oiset "length", iLength
+oiset "beat", iBeat
+oiset "bar", iBar
+
+iDelay otime p5, p6
+
+oiset "delay", iDelay
+
+iDelay += -giDial
+
+if iDelay < 0 then
+
+iDelay += iBar
+
+endif
+
+iDuration = p7 * iBeat
+iRate = 1 / iBar
+
+SInstrument strget p8
+iInstrument nstrnum SInstrument
+iInstrument += iInstance
+
+SScore sprintf "i %f %f %f", iInstrument, iDelay, iDuration
+
+iPCount pcount
+iIndex = 12
+
+while iIndex <= iPCount do
+
+SConcat sprintf "%s %f", SScore, p ( iIndex )
+SScore = SConcat
+
+iIndex += 1
+
+od
+
+kBeat metro iRate
+
+scoreline SScore, kBeat
+
+if iRate == 0 then
+
+scoreline_i SScore
+
+endif
+
+skip:
+
+endif
+
+endin

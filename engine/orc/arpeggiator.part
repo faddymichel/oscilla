@@ -1,0 +1,17 @@
+instr arpeggiator
+
+iNote = 4
+
+iLength pcount
+iLength += -3
+
+while iNote < iLength do
+
+iOctave = int ( p ( iNote ) )
+iPitch = int ( p ( iNote + 1 ) )
+iNumber = giStep [ iPitch % 7 ] + ( iOctave % 12 ) * 12
+iFrequency cpstuni iNumber, giMaqam
+
+od
+
+endin

@@ -1,0 +1,30 @@
+giRecording = 0
+
+instr recorder
+
+p3 = 16
+
+aLeft, aRight ins
+
+giRecording += 1
+
+SRecording sprintf "recording-%d.wav", giRecording
+
+fout SRecording, -1, aLeft, aRight
+
+chnmix aLeft, "left"
+chnmix aRight, "right"
+
+schedule "beep", 0, 1/16
+
+endin
+
+instr beep
+
+aEnvelope linsegr 0, 1/128, .5, 1/128, 0
+
+aBeep poscil aEnvelope, 880
+
+outs aBeep, aBeep
+
+endin

@@ -1,0 +1,82 @@
+instr beat
+
+iInstance = int ( p4 ) % 1000000 / 1000000
+iOrder = int ( p5 )
+
+p1 += iInstance
+
+if iOrder == 233 then
+
+iLooper nstrnum "looper"
+iLooper += iInstance
+
+iTempo = p10
+iLength = p11
+iBeat = ( 4 / p12 ) * 60 / iTempo
+iBar = iBeat * iLength
+
+oiset "tempo", iTempo
+oiset "length", iLength
+oiset "beat", iBeat
+oiset "bar", iBar
+
+iDelay otime p6, p7
+iDuration = p8 * iBeat
+iRate = 1 / iBar; iTempo / 60 / iLength
+
+oiset "delay", iDelay
+
+SInstrument strget p9
+iInstrument nstrnum SInstrument
+iInstrument += iInstance
+
+SScore sprintf "i %f %f %d %f %f %f", iLooper, iDelay, -1, iInstrument, iRate, iDuration
+
+iPCount pcount
+iIndex = 13
+
+while iIndex <= iPCount do
+
+SConcat sprintf "%s %f", SScore, p ( iIndex )
+SScore = SConcat
+
+iIndex += 1
+
+od
+
+scoreline_i SScore
+
+endif
+
+endin
+
+instr looper
+
+iInstrument = p4
+iDuration = p6
+
+SScore sprintf "i %f 0 %f", iInstrument, iDuration
+
+iLength pcount
+iIndex = 7
+
+while iIndex <= iLength do
+
+SConcat sprintf "%s %f", SScore, p ( iIndex )
+SScore = SConcat
+
+iIndex += 1
+
+od
+
+kBeat metro p5
+
+scoreline SScore, kBeat
+
+if p5 == 0 then
+
+scoreline_i SScore
+
+endif
+
+endin

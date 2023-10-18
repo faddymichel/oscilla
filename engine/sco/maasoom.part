@@ -1,0 +1,18 @@
+#define kick1 #$oscilla(1000)#
+#define kick2 #$oscilla(1001)#
+
+#define snare1 #$oscilla(2000)#
+#define snare2 #$oscilla(2001)#
+#define snare3 #$oscilla(2002)#
+
+$kick1 $add 1 0 1 "kick" 120 4 4
+
+$snare1 $add 0 [1/2] 1 "snare" .
+
+$snare2 $add 0 [3/2] 1 "snare" .
+
+$kick2 $add 2 2 1 "kick" .
+
+$snare3 $add 0 3 1 "snare" .
+
+$oscilla(13013) $add 3 0 -1 "rewind" 120 4 4 2

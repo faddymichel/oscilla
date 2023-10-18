@@ -1,0 +1,68 @@
+chnset 2, "maqam/step/1"
+chnset 4, "maqam/step/2"
+chnset 5, "maqam/step/3"
+chnset 7, "maqam/step/4"
+chnset 9, "maqam/step/5"
+chnset 11, "maqam/step/6"
+
+opcode oMaqam, i, 0
+
+iMaqam [] init 7
+
+chnset 1, "maqam/tuning/0"
+iMaqam [ 0 ] = 1
+
+iIndex = 1
+
+while iIndex < 7 do
+
+SStep sprintf "maqam/step/%d", iIndex
+iStep chnget SStep
+
+STuning sprintf "maqam/tuning/%d", iIndex
+iTuning chnget STuning
+
+iMaqam [ iIndex ] = 2 ^ ( ( iTuning + iStep * 2 ) / 24 )
+
+iIndex += 1
+
+od
+
+iFT ftgen 0, 0, 64, -2, 12, 2, cpsmidinn ( 60 ), 60, \
+1, \
+1, \
+iMaqam [ 1 ], \
+iMaqam [ 1 ], \
+iMaqam [ 2 ], \
+iMaqam [ 3 ], \
+iMaqam [ 3 ], \
+iMaqam [ 4 ], \
+iMaqam [ 4 ], \
+iMaqam [ 5 ], \
+iMaqam [ 5 ], \
+iMaqam [ 6 ]
+
+xout iFT
+
+endop
+
+chnset 1, "maqam/tuning/1"
+chnset -1, "maqam/tuning/2"
+chnset 1, "maqam/tuning/3"
+chnset 1, "maqam/tuning/4"
+chnset -1, "maqam/tuning/5"
+chnset 1, "maqam/tuning/6"
+
+giMaqam oMaqam
+
+opcode oFrequency, k, k
+
+kPitch xin
+
+kNumber pchtom kPitch
+
+kFrequency cpstun kNumber, kNumber, giMaqam
+
+xout kFrequency
+
+endop

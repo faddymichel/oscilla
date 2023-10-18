@@ -1,0 +1,29 @@
+#define oparameter(rate) #opcode o$rate.get, $rate, S
+
+SName xin
+
+iInstance = frac ( p1 )
+
+SParameter sprintf "%f/%s", iInstance, SName
+
+$rate.Value chnget SParameter
+
+xout $rate.Value
+
+endop
+
+opcode o$rate.set, 0, S$rate
+
+SName, $rate.Value xin
+
+iInstance = frac ( p1 )
+
+SParameter sprintf "%f/%s", iInstance, SName
+
+chnset $rate.Value, SParameter
+
+endop#
+
+$oparameter(i)
+$oparameter(k)
+$oparameter(a)

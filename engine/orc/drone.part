@@ -1,0 +1,18 @@
+instr drone
+
+aNote = 0
+
+aBEOscillator beosc 440, .5
+
+aNote += aBEOscillator
+
+aLFO lfo 1, 4
+
+aAmplitude linen aLFO, 2, p3, 2
+
+aNote *= aAmplitude
+
+chnmix aNote, "left"
+chnmix aNote, "right"
+
+endin

@@ -1,0 +1,12 @@
+opcode otime, i, ii
+
+iBarPointer, iBeatPointer xin
+
+iBeat oiget "beat"
+iLength oiget "length"
+
+iTime = ( iBeatPointer + iBarPointer * iLength ) * iBeat
+
+xout iTime
+
+endop

@@ -1,0 +1,13 @@
+instr rewind
+
+iBar = p4
+iBeat = p5
+
+iTime otime iBar, iBeat
+iDelay oiget "delay"
+
+giDial = iDelay - iTime
+
+rewindscore
+
+endin

@@ -1,0 +1,8 @@
+instr chord
+
+iOctave = p4
+iKey = p5
+iNumber = giNumber [ iKey ]
+
+
+endin
